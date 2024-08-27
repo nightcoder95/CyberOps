@@ -1,0 +1,77 @@
+/* Container styling */
+.delete-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Warning card styling */
+.warning-card {
+  margin: 1.5rem;
+  padding: 2rem;
+  border: 1px solid #d9534f; /* Use a softer border to complement the red */
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Larger shadow for prominence */
+  background-color: #fff3f3; /* Light red background to emphasize warning */
+  max-width: 500px;
+  text-align: center;
+}
+
+/* Warning title styling */
+.warning-title {
+  font-size: 2.25rem; /* Larger title for emphasis */
+  font-weight: 800; /* Extra bold text */
+  color: #d9534f; /* Matching red color */
+  margin: 0 0 1.25rem 0; /* Adjusted margin for spacing */
+}
+
+/* Warning message styling */
+.warning-message {
+  font-size: 1.125rem; /* Slightly larger for readability */
+  color: #333; /* Dark gray for better contrast */
+  margin: 0 0 1.5rem 0; /* Margin for spacing */
+  line-height: 1.5; /* Improved line height for readability */
+}
+
+/* Actions styling */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Button styling */
+.btn {
+  padding: 0.75rem 1.5rem; /* Consistent padding */
+  border: none;
+  border-radius: 6px; /* Rounded corners */
+  font-size: 1.125rem; /* Larger font size */
+  cursor: pointer;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  font-family: "Arial", sans-serif; /* Consistent font family */
+}
+
+.btn-danger {
+  background-color: #d9534f; /* Deep red */
+}
+
+.btn-danger:hover {
+  background-color: #c9302c; /* Darker red on hover */
+  transform: scale(1.05); /* Slightly enlarge button */
+}
+
+.btn-primary {
+  background-color: #0275d8; /* Vibrant blue */
+}
+
+.btn-primary:hover {
+  background-color: #025aa5; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge button */
+}

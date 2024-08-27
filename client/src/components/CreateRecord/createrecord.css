@@ -1,0 +1,96 @@
+/* Form Container Styling */
+.form-container {
+  width: 80%;
+  max-width: 800px;
+  margin:0px auto 20px; /* Space for Navbar */
+  padding: 20px;
+  background-color: var(--background-color2);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* height: calc(100vh - 120px); /* Adjust for header and margins */
+  overflow-y: auto;
+}
+
+/* Form Styling */
+.data-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Decreased spacing between form groups */
+}
+
+/* Group Styling */
+.group-1,
+.group-2,
+.group-3,
+.group-4,
+.group-5,
+.group-7 {
+  display: flex;
+  gap: 10px; /* Decreased spacing between inputs */
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 8px;
+  border: 1px solid var(--Border-color);
+  border-radius: 5px;
+  background-color: var(--background-color3);
+  font-size: 14px;
+  color: var(--primary-color);
+  outline: none;
+  color: black;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Submit Button Styling */
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Adjustments for Smaller Screens */
+@media (max-width: 768px) {
+  .form-group {
+    min-width: 100%;
+  }
+
+  .form-container {
+    width: 90%;
+  }
+}
+
+.create-heading{
+  color: var(--secondary-color);
+  padding-bottom: 15px;
+}
