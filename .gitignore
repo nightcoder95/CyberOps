@@ -22,3 +22,7 @@ npm-debug.log*
 # Other IDE-specific files
 .idea/
 .vscode/
+
+/client/public/SMM/
+
+/Data/
