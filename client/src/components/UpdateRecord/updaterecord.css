@@ -3,3 +3,15 @@
     color: #4b49ac;
     /* font-family: ; */
 }
+
+/* .update-btn{
+    display: flex; 
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 50px;
+} */
+
+.update-btn .submit-btn{
+    background-color: rgb(0, 191, 255);
+}
+

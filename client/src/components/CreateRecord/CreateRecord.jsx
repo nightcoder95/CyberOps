@@ -74,7 +74,10 @@ function CreateRecord() {
       .post("http://localhost:3000/api/create_record", dataToSend)
       .then((response) => {
         toast.success(response.data.message);
-        navigate("/");
+        setTimeout(() => {
+          window.location.reload(); // Reload the page after 1 second
+        }, 1000); // 1000 milliseconds = 1 second
+        // navigate("/");
         setFormData(initialFormData);
       })
       .catch((err) => {
@@ -254,6 +257,7 @@ function CreateRecord() {
                     type="text"
                     id="reference"
                     name="reference"
+                    required
                   />
                 </div>
                 <div className="form-group">
@@ -299,7 +303,7 @@ function CreateRecord() {
               <div className="group-7">
                 <div className="form-group social">
                   <label for="social">Social</label>
-                  <input
+                  <textarea
                     onChange={inputHandler}
                     type="text"
                     id="social"

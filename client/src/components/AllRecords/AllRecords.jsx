@@ -20,15 +20,19 @@ function AllRecords() {
     setGlobalFilter(e.target.value);
   };
 
-
   //function to change date to dd-MM-yyyy
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-  }
+  // function formatDate(dateString) {
+  //   const date = new Date(dateString);
+  //   const day = String(date.getDate()).padStart(2, "0");
+  //   const month = String(date.getMonth() + 1).padStart(2, "0");
+  //   const year = date.getFullYear();
+  //   return `${day}-${month}-${year}`;
+  // }
+  const formatDate = (value) => {
+    if (!value) return ""; // In case the date is null or undefined
+    const date = new Date(value);
+    return date.toLocaleDateString("en-GB"); // 'en-GB' formats date as 'dd/mm/yyyy'
+  };
 
   const handleMenuClick = () => {
     setIsNavClosed(!isNavClosed);
@@ -61,15 +65,16 @@ function AllRecords() {
         <Button
           label="View"
           link
-          onClick={() => navigate(`/record-detail/` + rowData._id)}
+          onClick={() => window.open(`/record-detail/${rowData._id}`, "_blank")}
           style={{ marginRight: "15px" }}
         />
         <Button
           label="Edit"
           link
-          onClick={() => navigate(`/update-record/` + rowData._id)}
+          onClick={() => window.open(`/update-record/${rowData._id}`, "_blank")}
           style={{ marginRight: "15px" }}
         />
+
         {/* <Button
           label="Delete"
           link
@@ -137,7 +142,7 @@ function AllRecords() {
                   sortable
                   field="report_date"
                   header="Date"
-                  dateFormat="dd/mm/yyyy"></Column>
+                  body={(rowData) => formatDate(rowData.report_date)}></Column>
                 <Column
                   sortable
                   field="from"

@@ -148,6 +148,13 @@ function RecordDetail() {
     };
   };
 
+  //To get date in DD/MM/YYYY format
+  const formatDate = (value) => {
+    if (!value) return ""; // In case the date is null or undefined
+    const date = new Date(value);
+    return date.toLocaleDateString("en-GB"); // 'en-GB' formats date as 'dd/mm/yyyy'
+  };
+
   return (
     <>
       {/* header part */}
@@ -203,7 +210,8 @@ function RecordDetail() {
                   <div className="section">
                     <h2>Additional Details</h2>
                     <p>
-                      <span>Report Date:</span> {formData.report_date}
+                      <span>Report Date:</span>{" "}
+                      {formatDate(formData.report_date)}
                     </p>
                     <p>
                       <span>From:</span> {formData.from}
