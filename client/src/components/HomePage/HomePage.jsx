@@ -4,9 +4,37 @@ import "./homepage-responsive.css";
 import AllRecords from "../AllRecords/AllRecords";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+import axios from "axios";
+import TopDataCharts from "../Charts/TopDataCharts";
 
 function HomePage() {
   const [isNavClosed, setIsNavClosed] = useState(false);
+  const [totalRecords, setTotalRecords] = useState(null);
+  const [totalAccounts, setTotalAccounts] = useState(null);
+
+  // Effect for getting total records
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/total_records")
+      .then((response) => {
+        setTotalRecords(response.data.totalRecords);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+  // Effect for getting total distinct social media accounts
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api//total_accounts")
+      .then((response) => {
+        setTotalAccounts(response.data.totalNames);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
 
   // Toggle navigation menu
   const handleMenuClick = () => {
@@ -18,36 +46,33 @@ function HomePage() {
   return (
     <>
       {/* header part */}
-      <Navbar handleMenuClick={handleMenuClick}/>
+      <Navbar handleMenuClick={handleMenuClick} />
 
       <div className="main-container">
         {/* SideBar  */}
-        
-        <Sidebar isNavClosed={isNavClosed}/>
+
+        <Sidebar isNavClosed={isNavClosed} />
         {/* Hero Section */}
         <div className="main">
           {/* Cards */}
           <div className="box-container">
             <div className="box box1">
               <div className="text">
-                <h2 className="topic-heading">60.5k</h2>
-                <h2 className="topic">Article Views</h2>
+                <h2 className="topic-heading">{totalRecords}</h2>
+                <h2 className="topic">Records</h2>
               </div>
 
-              <img
-                src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png"
-                alt="Views"
-              />
+              <img src="/records.png" alt="Views" />
             </div>
 
             <div className="box box2">
               <div className="text">
-                <h2 className="topic-heading">150</h2>
-                <h2 className="topic">Likes</h2>
+                <h2 className="topic-heading">{totalAccounts}</h2>
+                <h2 className="topic">Social Media Accounts</h2>
               </div>
 
               <img
-                src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
+                src="/account.png"
                 alt="likes"
               />
             </div>
@@ -75,6 +100,11 @@ function HomePage() {
                 alt="published"
               />
             </div>
+          </div>
+          {/* Charts Section */}
+          <div className="chart-container">
+            {/* <h3>Data Insights</h3> */}
+            <TopDataCharts /> {/* Render TopDataCharts here */}
           </div>
           {/* Table */}
           {/* <div className="report-container">

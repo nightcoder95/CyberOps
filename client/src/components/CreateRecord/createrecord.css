@@ -32,9 +32,15 @@
 
 .form-group {
   flex: 1;
-  min-width: 200px;
+  min-width: 100px;
   display: flex;
   flex-direction: column;
+}
+.link{
+  min-width: 600px;
+}
+.social{
+  min-width: 700px;
 }
 
 .form-group label {

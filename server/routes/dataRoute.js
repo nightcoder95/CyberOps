@@ -1,5 +1,5 @@
 import express from 'express';
-import { createRecord, getAllRecords, getRecordById, updateRecord, deleteRecord, findLastRecord } from '../controllers/dataController.js';
+import { createRecord, getAllRecords, getRecordById, updateRecord, deleteRecord, findLastRecord, totalRecords, chartData, totalSMNames } from '../controllers/dataController.js';
 
 const route = express.Router();
 
@@ -20,5 +20,14 @@ route.delete('/delete_record/:id', deleteRecord)
 
 // route for getting the count of records
 route.get('/last_record/', findLastRecord)
+
+//route for getting total records
+route.get('/total_records/', totalRecords)
+
+// route for getting chart data
+route.get('/chart_data/', chartData)
+
+// route to get all distinct sm_name
+route.get('/total_accounts/', totalSMNames)
 
 export default route;

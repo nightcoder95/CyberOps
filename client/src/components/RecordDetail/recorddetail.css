@@ -73,6 +73,7 @@
     border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: 15px;
+    display: block;
   }
   
   .section h2 {
@@ -86,6 +87,7 @@
   .section p {
     margin: 5px 0;
     color: #555;
+    word-wrap: break-word;
   }
   
   .section span {

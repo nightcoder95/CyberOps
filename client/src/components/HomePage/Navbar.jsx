@@ -7,7 +7,7 @@ function Navbar({handleMenuClick}) {
         <div className="logosec">
           <div className="logo">CyberOps</div>
           <img
-            src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
+            src="/hamburger.png"
             className="icn menuicn {`navcontainer ${isSidebarOpen ? '' : 'navclose'}`}"
             id="menuicn"
             alt="menu-icon"
@@ -15,7 +15,7 @@ function Navbar({handleMenuClick}) {
           />
         </div>
 
-        <div className="searchbar">
+        {/* <div className="searchbar">
           <input type="text" placeholder="Search" />
           <div className="searchbtn">
             <img
@@ -24,12 +24,12 @@ function Navbar({handleMenuClick}) {
               alt="search-icon"
             />
           </div>
-        </div>
+        </div> */}
 
         <div className="message">
           <div className="dp">
             <img
-              src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
+              src="/user.png"
               className="dpicn"
               alt="dp"
             />

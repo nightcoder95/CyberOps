@@ -25,6 +25,9 @@ mongoose.connect(MONGO_URL)
         app.listen(PORT, () => {
             console.log(`Connected on port ${PORT}`);
         })
+        // app.listen(PORT, '0.0.0.0', () => {
+        //     console.log(`Server running on http://0.0.0.0:${PORT}`);
+        //   });
     })
     .catch((error) => {
         console.log('Error connecting to database:', error);

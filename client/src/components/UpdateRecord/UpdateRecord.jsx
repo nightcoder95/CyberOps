@@ -106,7 +106,7 @@ function UpdateRecord() {
 
             />
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="type">Type</label>
             <input
               onChange={inputHandler}
@@ -116,7 +116,7 @@ function UpdateRecord() {
               value={formData.type}
 
             />
-          </div>
+          </div> */}
           <div className="form-group">
             <label htmlFor="pp_id">PP ID</label>
             <input

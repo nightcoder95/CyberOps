@@ -188,3 +188,73 @@ export const deleteRecord = async (req, res) => {
         res.status(500).json(error.message)
     }
 }
+
+export const totalRecords = async (req, res) => {
+    try {
+        const totalRecords = await SocialData.countDocuments();
+        res.status(200).json({ totalRecords })
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}
+
+//function to find all the distinct sm_name in database
+export const totalSMNames = async (req, res) => {
+    try {
+        // Use the distinct method to get unique sm_names
+        const distinctSMNames = await SocialData.distinct("sm_name")
+
+        // Get the count of distinct sm_names
+        const totalDistinctSMNames = distinctSMNames.length;
+
+        // Send the result as a response
+        res.status(200).json({
+            totalNames: totalDistinctSMNames,
+            message: "Successfully retrieved total number of distinct sm_names"
+        });
+
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}
+
+
+export const chartData = async (req, res) => {
+    try {
+        // Aggregation to get top 10 'sm_name' by count
+        const topSMNames = await SocialData.aggregate([
+            {
+                $match: { sm_name: { $ne: null } }, // Exclude documents where 'sm_name' is null
+            }, {
+                $group: {
+                    _id: "$sm_name", // Group by 'sm_name'
+                    count: { $sum: 1 }, // Count occurrences
+                },
+            },
+            { $sort: { count: -1 } }, // Sort by count in descending order
+            { $limit: 20 }, // Limit to top 10 results
+        ]);
+
+        // Aggregation to get top 10 'from' by count
+        const topFrom = await SocialData.aggregate([
+            {
+                $match: { from: { $ne: null } }, // Exclude documents where 'from' is null
+            }, {
+                $group: {
+                    _id: "$from", // Group by 'from'
+                    count: { $sum: 1 }, // Count occurrences
+                },
+            },
+            { $sort: { count: -1 } }, // Sort by count in descending order
+            { $limit: 100 }, // Limit to top 10 results
+        ]);
+
+        // Send the data back to the frontend
+        res.status(200).json({
+            topSMNames,
+            topFrom,
+        });
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}

@@ -56,7 +56,7 @@ function Sidebar({ isNavClosed }) {
               <h3>Data Table</h3>
             </div>
 
-            <div className="nav-option option4" onclick="selectOption(this)">
+            {/* <div className="nav-option option4" onclick="selectOption(this)">
               <img
                 src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/6.png"
                 className="nav-img"
@@ -90,7 +90,7 @@ function Sidebar({ isNavClosed }) {
                 alt="logout"
               />
               <h3>Logout</h3>
-            </div>
+            </div> */}
           </div>
         </nav>
       </div>

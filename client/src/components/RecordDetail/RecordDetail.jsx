@@ -6,6 +6,8 @@ import "./recorddetail.css";
 import Navbar from "../HomePage/Navbar";
 import Sidebar from "../HomePage/Sidebar";
 
+import { jsPDF } from "jspdf";
+import "jspdf-autotable"; // For tables
 
 function RecordDetail() {
   const navigate = useNavigate();
@@ -51,8 +53,100 @@ function RecordDetail() {
     setIsNavClosed(!isNavClosed);
   };
 
-  //For Delete button
-  
+  // Function to generate the PDF without image
+  // const generatePDF = () => {
+  //   const doc = new jsPDF();
+
+  //   // Title
+  //   doc.text("Record Details", 20, 10);
+
+  //   // Data
+  //   const recordData = [
+  //     ["Record ID", formData.record_id],
+  //     ["Platform", formData.platform],
+  //     ["Type 01", formData.type_01],
+  //     ["Type 02", formData.type_02],
+  //     ["Type 03", formData.type_03],
+  //     ["Report Date", formData.report_date],
+  //     ["From", formData.from],
+  //     ["Reference", formData.reference],
+  //     ["Organization", formData.organization],
+  //     ["Social Media Name", formData.sm_name],
+  //     ["Link", formData.link],
+  //     ["SMM Link", formData.smm_link],
+  //     ["Remarks", formData.remarks],
+  //   ];
+
+  //   // Add the table to the PDF
+  //   doc.autoTable({
+  //     head: [["Field", "Value"]],
+  //     body: recordData,
+  //     startY: 20,
+  //   });
+
+  //   // Save the PDF
+  //   doc.save(`record-${formData.record_id}.pdf`);
+  // };
+
+  // Function to generate the PDF with image
+  const generatePDF = async () => {
+    const doc = new jsPDF();
+
+    // Fetch the image from the public folder
+    const imgUrl = `/SMM/${formData.record_id}.jpg`;
+    const response = await fetch(imgUrl);
+    const imgBlob = await response.blob();
+
+    // Convert image to base64 format
+    const reader = new FileReader();
+    reader.readAsDataURL(imgBlob);
+    reader.onloadend = function () {
+      const base64data = reader.result;
+
+      // Create an Image object to get its original dimensions
+      const img = new Image();
+      img.src = base64data;
+
+      img.onload = function () {
+        const imgWidth = 100; // Fixed width
+        const imgHeight = 100; // Fixed height
+
+        // Calculate x-axis to center the image horizontally
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const xPos = (pageWidth - imgWidth) / 2; // Center the image horizontally
+
+        // Add the image with fixed width and height, and center it horizontally
+        doc.addImage(base64data, "JPEG", xPos, 20, imgWidth, imgHeight);
+
+        // Add the table or other data starting below the image
+        const recordData = [
+          ["Record ID", formData.record_id],
+          ["Platform", formData.platform],
+          ["Type 01", formData.type_01],
+          ["Type 02", formData.type_02],
+          ["Type 03", formData.type_03],
+          ["Report Date", formData.report_date],
+          ["From", formData.from],
+          ["Reference", formData.reference],
+          ["Organization", formData.organization],
+          ["Social Media Name", formData.sm_name],
+          ["Link", formData.link],
+          ["SMM Link", formData.smm_link],
+          ["Remarks", formData.remarks],
+        ];
+
+        // Add the table after the image
+        doc.autoTable({
+          head: [["Field", "Value"]],
+          body: recordData,
+          startY: 20 + imgHeight + 10, // Start the table after the image
+        });
+
+        // Save the PDF
+        doc.save(`record-${formData.record_id}.pdf`);
+      };
+    };
+  };
 
   return (
     <>
@@ -73,11 +167,12 @@ function RecordDetail() {
             <div className="content">
               <div className="image-container">
                 <img
-                  src={`/${formData.record_id}.jpg`}
+                  src={`/SMM/${formData.record_id}.jpg`}
                   alt="Image missing"
                   className="image"
                 />
               </div>
+
               <div className="details-container">
                 <div className="section-1">
                   <div className="section">
@@ -93,6 +188,15 @@ function RecordDetail() {
                     </p>
                     <p>
                       <span>Type 03:</span> {formData.type_03}
+                    </p>
+                    {/* <p>
+                      <span>Type:</span> {formData.type}
+                    </p> */}
+                    <p>
+                      <span>PP ID:</span> {formData.pp_id}
+                    </p>
+                    <p>
+                      <span>DB ID:</span> {formData.dbid}
                     </p>
                   </div>
 
@@ -110,8 +214,12 @@ function RecordDetail() {
                     <p>
                       <span>Organization:</span> {formData.organization}
                     </p>
+                    <p>
+                      <span>Mobile:</span> {formData.mobile}
+                    </p>
                   </div>
                 </div>
+
                 <div className="section-2">
                   <div className="section">
                     <h2>Social Media & Links</h2>
@@ -120,12 +228,18 @@ function RecordDetail() {
                     </p>
                     <p>
                       <span>Link:</span>{" "}
-                      <a href="https://example.com" target="_blank">
+                      <a
+                        href={formData.link}
+                        target="_blank"
+                        rel="noopener noreferrer">
                         {formData.link}
                       </a>
                     </p>
                     <p>
                       <span>SMM Link:</span> {formData.smm_link}
+                    </p>
+                    <p>
+                      <span>Social:</span> {formData.social}
                     </p>
                   </div>
 
@@ -138,10 +252,12 @@ function RecordDetail() {
                 </div>
 
                 <div className="actions">
-                  <Link to="/" className="button">
+                  <Link to="/data-table" className="button">
                     Go Back
                   </Link>
-                  {/* <Link to={`/delete-record/` + formData._id} className="button delete-button" >Delete</Link> */}
+                  <button onClick={generatePDF} className="button">
+                    Download PDF
+                  </button>
                 </div>
               </div>
             </div>

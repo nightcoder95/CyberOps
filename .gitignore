@@ -1,0 +1,24 @@
+# Node.js modules
+node_modules/
+
+# Environment variables
+.env
+
+# Log files
+*.log
+npm-debug.log*
+
+# MacOS system files
+.DS_Store
+
+# Build outputs
+/build
+/dist
+
+# Database files
+*.sqlite
+*.db
+
+# Other IDE-specific files
+.idea/
+.vscode/

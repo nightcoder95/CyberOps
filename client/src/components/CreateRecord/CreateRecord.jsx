@@ -117,7 +117,7 @@ function CreateRecord() {
                     onWheel={(e) => e.target.blur()}
                   />
                 </div>
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label for="type">Type</label>
                   <input
                     onChange={inputHandler}
@@ -125,7 +125,7 @@ function CreateRecord() {
                     id="type"
                     name="type"
                   />
-                </div>
+                </div> */}
                 <div className="form-group">
                   <label for="pp_id">PP ID</label>
                   <input
@@ -192,7 +192,11 @@ function CreateRecord() {
               <div className="group-3">
                 <div className="form-group">
                   <label for="platform">Platform</label>
-                  <select onChange={inputHandler} id="platform" name="platform"  defaultValue="facebook">
+                  <select
+                    onChange={inputHandler}
+                    id="platform"
+                    name="platform"
+                    defaultValue="facebook">
                     <option value="null"></option>
                     <option value="facebook">Facebook</option>
                     <option value="signal">Signal</option>
@@ -261,17 +265,6 @@ function CreateRecord() {
                     name="organization"
                   />
                 </div>
-              </div>
-              <div className="group-5">
-                <div className="form-group">
-                  <label for="sm_name">SM Name</label>
-                  <input
-                    onChange={inputHandler}
-                    type="text"
-                    id="sm_name"
-                    name="sm_name"
-                  />
-                </div>
                 <div className="form-group">
                   <label for="mobile">Mobile</label>
                   <input
@@ -282,18 +275,29 @@ function CreateRecord() {
                     onWheel={(e) => e.target.blur()}
                   />
                 </div>
-                <div className="form-group">
-                  <label for="link">Link</label>
-                  <input
-                    onChange={inputHandler}
-                    type="text"
-                    id="link"
-                    name="link"
-                  />
+                <div className="group-5">
+                  <div className="form-group">
+                    <label for="sm_name">SM Name</label>
+                    <input
+                      onChange={inputHandler}
+                      type="text"
+                      id="sm_name"
+                      name="sm_name"
+                    />
+                  </div>
+                  <div className="form-group link">
+                    <label for="link">Link</label>
+                    <input
+                      onChange={inputHandler}
+                      type="text"
+                      id="link"
+                      name="link"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="group-7">
-                <div className="form-group">
+                <div className="form-group social">
                   <label for="social">Social</label>
                   <input
                     onChange={inputHandler}

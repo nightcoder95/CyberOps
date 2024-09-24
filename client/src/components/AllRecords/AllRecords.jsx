@@ -20,6 +20,7 @@ function AllRecords() {
     setGlobalFilter(e.target.value);
   };
 
+
   //function to change date to dd-MM-yyyy
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -105,7 +106,7 @@ function AllRecords() {
             <div className="custom-datatable">
               <div className="p-inputgroup global-search">
                 <span className="p-inputgroup-addon search-icon">
-                  <img src="/search.png"/>
+                  <img src="/search.png" />
                 </span>
                 <InputText
                   type="search"
@@ -117,7 +118,6 @@ function AllRecords() {
               <DataTable
                 globalFilter={globalFilter}
                 value={records}
-                
                 resizableColumns
                 showGridlines
                 paginator
@@ -142,17 +142,21 @@ function AllRecords() {
                   sortable
                   field="from"
                   header="From"
-                  bodyStyle={{ padding: "10px", textAlign: "left"  }}></Column>
+                  bodyStyle={{ padding: "10px", textAlign: "left" }}></Column>
                 <Column
                   sortable
                   field="sm_name"
                   header="Social Media Name"
-                  bodyStyle={{ padding: "10px", textAlign: "left"  }}></Column>
+                  bodyStyle={{
+                    maxWidth: "50px",
+                    padding: "10px",
+                    textAlign: "left",
+                  }}></Column>
                 <Column
                   sortable
                   field="reference"
                   header="Reference"
-                  bodyStyle={{ padding: "10px", textAlign: "left"  }}></Column>
+                  bodyStyle={{ padding: "10px", textAlign: "left" }}></Column>
                 <Column
                   header="Action"
                   body={actionBodyTemplate}

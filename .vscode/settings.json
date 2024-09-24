@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["createrecord", "DBID", "primereact", "recorddetail"]
+  "cSpell.words": [
+    "autotable",
+    "createrecord",
+    "DBID",
+    "jspdf",
+    "primereact",
+    "recorddetail"
+  ]
 }
