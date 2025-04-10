@@ -11,7 +11,7 @@ function DeleteRecord() {
 
   const deleteRecord = async () => {
     await axios
-      .delete(`http://localhost:3000/api/delete_record/${id}`)
+      .delete(`http://172.18.20.63:3000/api/delete_record/${id}`)
       .then((response) => {
         toast.success(response.data.message);
         navigate("/");

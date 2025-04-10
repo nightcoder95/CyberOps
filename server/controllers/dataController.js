@@ -125,7 +125,6 @@ export const getAllRecords = async (req, res) => {
         // })
 
         res.status(200).json({ records })
-
     } catch (error) {
         res.status(500).json(error.message)
     }
@@ -219,6 +218,17 @@ export const totalSMNames = async (req, res) => {
 }
 
 
+/**
+ * Retrieves data for the charts on the dashboard page.
+ * 
+ * It makes two MongoDB aggregation queries to the SocialData collection.
+ * The first query gets the top 10 'sm_name' by count, excluding documents where 'sm_name' is null.
+ * The second query gets the top 10 'from' by count, excluding documents where 'from' is null.
+ * 
+ * The data is then sent back to the frontend as a JSON response with two properties: topSMNames and topFrom.
+ * Each property is an array of objects with _id and count properties. The _id property is the value of 'sm_name' or 'from' respectively, and the count property is the number of occurrences of that value.
+ * 
+ */
 export const chartData = async (req, res) => {
     try {
         // Aggregation to get top 10 'sm_name' by count
@@ -256,5 +266,46 @@ export const chartData = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json(error.message)
+    }
+}
+
+
+// Function to get the last report date
+export const findLastReportDate = async (req, res) => {
+    try {
+        // Find the most recent record based on the `report_date`
+        const latestRecord = await SocialData.findOne()
+            .sort({ report_date: -1 }) // Sort by `report_date` in descending order to get the most recent
+            .select('report_date') // Only select the `report_date` field
+
+        if (!latestRecord) {
+            return res.status(404).json({ message: "No records found" })
+        }
+        // Return the last report date in dd-mm-yyyy format
+        const date = new Date(latestRecord.report_date);
+        const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+        // console.log("Last Report Date: ", latestRecord.report_date)
+        res.status(200).json({ lastReportDate: formattedDate })
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
+// Function to get the last updated date
+export const getLastUpdatedDate = async (req, res) => {
+    try {
+        const lastUpdatedDate = await SocialData.findOne()
+            .sort({ updatedAt: -1 });
+        // console.log("Last Updated Record:", lastUpdatedDate.updatedAt);
+        // Method to format date in to dd-mm-yyyy 
+        if (lastUpdatedDate) {
+            const date = new Date(lastUpdatedDate.updatedAt);
+            const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+            res.status(200).json({ lastUpdatedDate: formattedDate });
+        }
+        // res.status(200).json({ lastUpdatedDate: lastUpdatedDate.updatedAt });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 }

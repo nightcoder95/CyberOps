@@ -11,7 +11,7 @@ const dataSchema = new mongoose.Schema({
   },
   type: {
     type: String,
- 
+
   },
   person: {
     type: String,
@@ -81,6 +81,7 @@ const dataSchema = new mongoose.Schema({
     type: String,
 
   },
-});
+},
+  { timestamps: true });// This will add createdAt and updatedAt automatically
 
 export default mongoose.model("SocialData", dataSchema)

@@ -1,11 +1,11 @@
 import React from "react";
 
-function Navbar({handleMenuClick}) {
+function Navbar({ handleMenuClick }) {
   return (
     <>
       <header>
         <div className="logosec">
-          <div className="logo">CyberOps</div>
+          <div className="logo">SMP MS</div>
           <img
             src="/hamburger.png"
             className="icn menuicn {`navcontainer ${isSidebarOpen ? '' : 'navclose'}`}"
@@ -13,6 +13,11 @@ function Navbar({handleMenuClick}) {
             alt="menu-icon"
             onClick={handleMenuClick}
           />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold tracking-wide text-center text-transparent text-gray-800 uppercase transition-all duration-500 ease-in-out sm:text-xl md:text-2xl lg:text-3xl md:tracking-wider bg-gradient-to-r from-purple-700 via-indigo-700 to-blue-700 bg-clip-text animate-pulse hover:animate-none hover:text-blue-600 md:text-left">
+            Social Media Profile Monitoring System
+          </h1>
         </div>
 
         {/* <div className="searchbar">
@@ -28,11 +33,7 @@ function Navbar({handleMenuClick}) {
 
         <div className="message">
           <div className="dp">
-            <img
-              src="/user.png"
-              className="dpicn"
-              alt="dp"
-            />
+            <img src="/user.png" className="dpicn" alt="dp" />
           </div>
         </div>
       </header>

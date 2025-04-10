@@ -5,9 +5,10 @@ import { toast } from "react-hot-toast";
 import "./recorddetail.css";
 import Navbar from "../HomePage/Navbar";
 import Sidebar from "../HomePage/Sidebar";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import "../../fonts/NotoSansMalayalam"; 
 
-import { jsPDF } from "jspdf";
-import "jspdf-autotable"; // For tables
 
 function RecordDetail() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function RecordDetail() {
   //Using useEffect for getting the user by ID
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/get_record/${id}`)
+      .get(`http://172.18.20.63:3000/api/get_record/${id}`)
       .then((response) => {
         setFormData(response.data);
       })
@@ -91,61 +92,63 @@ function RecordDetail() {
   // Function to generate the PDF with image
   const generatePDF = async () => {
     const doc = new jsPDF();
-
-    // Fetch the image from the public folder
-    const imgUrl = `/SMM/${formData.record_id}.jpg`;
-    const response = await fetch(imgUrl);
-    const imgBlob = await response.blob();
-
-    // Convert image to base64 format
-    const reader = new FileReader();
-    reader.readAsDataURL(imgBlob);
-    reader.onloadend = function () {
-      const base64data = reader.result;
-
-      // Create an Image object to get its original dimensions
-      const img = new Image();
-      img.src = base64data;
-
-      img.onload = function () {
-        const imgWidth = 100; // Fixed width
-        const imgHeight = 100; // Fixed height
-
-        // Calculate x-axis to center the image horizontally
-        const pageWidth = doc.internal.pageSize.getWidth();
-        const xPos = (pageWidth - imgWidth) / 2; // Center the image horizontally
-
-        // Add the image with fixed width and height, and center it horizontally
-        doc.addImage(base64data, "JPEG", xPos, 20, imgWidth, imgHeight);
-
-        // Add the table or other data starting below the image
-        const recordData = [
-          ["Record ID", formData.record_id],
-          ["Platform", formData.platform],
-          ["Type 01", formData.type_01],
-          ["Type 02", formData.type_02],
-          ["Type 03", formData.type_03],
-          ["Report Date", formData.report_date],
-          ["From", formData.from],
-          ["Reference", formData.reference],
-          ["Organization", formData.organization],
-          ["Social Media Name", formData.sm_name],
-          ["Link", formData.link],
-          ["SMM Link", formData.smm_link],
-          ["Remarks", formData.remarks],
-        ];
-
-        // Add the table after the image
-        doc.autoTable({
-          head: [["Field", "Value"]],
-          body: recordData,
-          startY: 20 + imgHeight + 10, // Start the table after the image
-        });
-
-        // Save the PDF
-        doc.save(`record-${formData.record_id}.pdf`);
+    doc.setFont("NotoSansMalayalam");
+    doc.setFontSize(12);
+    doc.text("മലയാളം ടെക്സ്റ്റ് റെക്കോർഡ്", 20, 30);
+  
+    try {
+      const imgUrl = `/SMM/${formData.record_id}.jpg`;
+      const response = await fetch(imgUrl);
+      const imgBlob = await response.blob();
+  
+      const reader = new FileReader();
+      reader.readAsDataURL(imgBlob);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+  
+        const img = new Image();
+        img.src = base64data;
+        img.onload = () => {
+          const imgWidth = 100;
+          const imgHeight = 100;
+          const pageWidth = doc.internal.pageSize.getWidth();
+          const xPos = (pageWidth - imgWidth) / 2;
+  
+          doc.addImage(base64data, "JPEG", xPos, 20, imgWidth, imgHeight);
+  
+          const recordData = [
+            ["Record ID", formData.record_id],
+            ["Platform", formData.platform],
+            ["Type 01", formData.type_01],
+            ["Type 02", formData.type_02],
+            ["Type 03", formData.type_03],
+            ["Report Date", formData.report_date],
+            ["From", formData.from],
+            ["Reference", formData.reference],
+            ["Organization", formData.organization],
+            ["Social Media Name", formData.sm_name],
+            ["Social Media Data", formData.social],
+            ["Link", formData.link],
+            ["SMM Link", formData.smm_link],
+            ["Remarks", formData.remarks],
+          ];
+  
+          autoTable(doc, {
+            head: [["Field", "Value"]],
+            body: recordData,
+            styles: {
+              font: "NotoSansMalayalam",
+              fontSize: 10,
+            },
+            startY: 20 + imgHeight + 10,
+          });
+  
+          doc.save(`record-${formData.record_id}.pdf`);
+        };
       };
-    };
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    }
   };
 
   //To get date in DD/MM/YYYY format
