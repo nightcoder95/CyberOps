@@ -9,11 +9,15 @@ import Navbar from "../HomePage/Navbar";
 import Sidebar from "../HomePage/Sidebar";
 import { InputText } from "primereact/inputtext";
 
-
 function AllRecords() {
   const [records, setRecords] = useState([]); // Stores the records fetched from the backend
   const [isNavClosed, setIsNavClosed] = useState(false);
   const navigate = useNavigate();
+
+  // TO switch between APIs dynamically
+  const API_URL = import.meta.env.DEV
+    ? import.meta.env.VITE_BACKEND_LOCALHOST
+    : import.meta.env.VITE_BACKEND_XCELL;
 
   // State for global filtering
   const [globalFilter, setGlobalFilter] = useState("");
@@ -44,9 +48,7 @@ function AllRecords() {
     const fetchData = async () => {
       try {
         console.log("Fetching data...");
-        const response = await axios.get(
-          "http://172.18.20.63:3000/api/get_records"
-        );
+        const response = await axios.get(`${API_URL}/api/get_records`);
         // Update state with the fetched records and total pages
         setRecords(response.data.records);
         console.log(records);
@@ -162,7 +164,7 @@ function AllRecords() {
                   sortable
                   field="social"
                   header="Data from SM"
-                  body={rowData => (
+                  body={(rowData) => (
                     <div
                       style={{
                         whiteSpace: "nowrap",

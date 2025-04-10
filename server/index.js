@@ -16,8 +16,20 @@ app.use('/api', route)
 
 
 app.use(cors({
-    origin: 'http://172.18.20.63:5173/', // Frontend address
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            process.env.FRONTEND_URL,
+            process.env.FRONTEND_URL_LocalHost
+        ];
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
 }));
+
 /* The code snippet is setting up the configuration for the server's port and MongoDB connection URL
 using environment variables. */
 const PORT = process.env.PORT || 3000;

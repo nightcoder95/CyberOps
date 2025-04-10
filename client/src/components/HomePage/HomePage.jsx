@@ -8,9 +8,6 @@ import axios from "axios";
 import TopDataCharts from "../Charts/TopDataCharts";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 function HomePage() {
   const [isNavClosed, setIsNavClosed] = useState(false);
   const [totalRecords, setTotalRecords] = useState(null);
@@ -18,12 +15,16 @@ function HomePage() {
   const [lastReportDate, setLastReportDate] = useState(null);
   const [lastUpdateDate, setLastUpdateDate] = useState(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const API_URL = import.meta.env.DEV
+    ? import.meta.env.VITE_BACKEND_LOCALHOST
+    : import.meta.env.VITE_BACKEND_XCELL;
 
   // Effect for getting total records
   useEffect(() => {
     axios
-      .get("http://172.18.20.63:3000/api/total_records")
+      .get(`${API_URL}/api/total_records`)
       .then((response) => {
         setTotalRecords(response.data.totalRecords);
       })
@@ -35,7 +36,7 @@ function HomePage() {
   // Effect for getting total distinct social media accounts
   useEffect(() => {
     axios
-      .get("http://172.18.20.63:3000/api//total_accounts")
+      .get(`${API_URL}/api//total_accounts`)
       .then((response) => {
         setTotalAccounts(response.data.totalNames);
       })
@@ -47,7 +48,7 @@ function HomePage() {
   // Effect to get the latest report date
   useEffect(() => {
     axios
-      .get("http://172.18.20.63:3000/api/last_report_date/")
+      .get(`${API_URL}/api/last_report_date/`)
       .then((response) => {
         setLastReportDate(response.data.lastReportDate);
       })
@@ -59,7 +60,7 @@ function HomePage() {
   // Effect for getting last updated date
   useEffect(() => {
     axios
-      .get("http://172.18.20.63:3000/api/last_updated_date/")
+      .get(`${API_URL}/api/last_updated_date/`)
       .then((response) => {
         setLastUpdateDate(response.data.lastUpdatedDate);
       })
@@ -88,7 +89,7 @@ function HomePage() {
         <div className="main">
           {/* Cards */}
           <div className="box-container">
-            <div className="box box1" onClick={()=> navigate('/data-table')}>
+            <div className="box box1" onClick={() => navigate("/data-table")}>
               <div className="text">
                 <h2 className="text-2xl font-black ">{totalRecords}</h2>
                 <h2 className="topic">Records</h2>

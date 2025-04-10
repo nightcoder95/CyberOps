@@ -34,6 +34,10 @@ function CreateRecord() {
   };
   const [formData, setFormData] = useState(initialFormData);
 
+  const API_URL = import.meta.env.DEV
+    ? import.meta.env.VITE_BACKEND_LOCALHOST
+    : import.meta.env.VITE_BACKEND_XCELL;
+
   // function to store the user entered form data to the state variable
   const inputHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -49,9 +53,7 @@ function CreateRecord() {
     const fetchData = async () => {
       try {
         console.log("Fetching data...");
-        const response = await axios.get(
-          "http://172.18.20.63:3000/api/last_record"
-        );
+        const response = await axios.get(`${API_URL}/api/last_record`);
         // Update state with the fetched records and total pages
         const result = response.data.lastRecord;
         setLastRecord(result + 1);
@@ -71,7 +73,7 @@ function CreateRecord() {
     const dataToSend = { ...formData, record_id: lastRecord };
     console.log(dataToSend);
     await axios
-      .post("http://172.18.20.63:3000/api/create_record", dataToSend)
+      .post(`${API_URL}/api/create_record`, dataToSend)
       .then((response) => {
         toast.success(response.data.message);
         setTimeout(() => {

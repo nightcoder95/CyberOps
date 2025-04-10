@@ -7,8 +7,7 @@ import Navbar from "../HomePage/Navbar";
 import Sidebar from "../HomePage/Sidebar";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import "../../fonts/NotoSansMalayalam"; 
-
+// import "../../fonts/NotoSansMalayalam";
 
 function RecordDetail() {
   const navigate = useNavigate();
@@ -35,10 +34,14 @@ function RecordDetail() {
   };
   const [formData, setFormData] = useState(initialFormData);
 
+  const API_URL = import.meta.env.DEV
+    ? import.meta.env.VITE_BACKEND_LOCALHOST
+    : import.meta.env.VITE_BACKEND_XCELL;
+
   //Using useEffect for getting the user by ID
   useEffect(() => {
     axios
-      .get(`http://172.18.20.63:3000/api/get_record/${id}`)
+      .get(`${API_URL}/api/get_record/${id}`)
       .then((response) => {
         setFormData(response.data);
       })
@@ -92,20 +95,20 @@ function RecordDetail() {
   // Function to generate the PDF with image
   const generatePDF = async () => {
     const doc = new jsPDF();
-    doc.setFont("NotoSansMalayalam");
-    doc.setFontSize(12);
-    doc.text("മലയാളം ടെക്സ്റ്റ് റെക്കോർഡ്", 20, 30);
-  
+    // doc.setFont("NotoSansMalayalam");
+    // doc.setFontSize(12);
+    // doc.text("മലയാളം ടെക്സ്റ്റ് റെക്കോർഡ്", 20, 30);
+
     try {
       const imgUrl = `/SMM/${formData.record_id}.jpg`;
       const response = await fetch(imgUrl);
       const imgBlob = await response.blob();
-  
+
       const reader = new FileReader();
       reader.readAsDataURL(imgBlob);
       reader.onloadend = () => {
         const base64data = reader.result;
-  
+
         const img = new Image();
         img.src = base64data;
         img.onload = () => {
@@ -113,9 +116,9 @@ function RecordDetail() {
           const imgHeight = 100;
           const pageWidth = doc.internal.pageSize.getWidth();
           const xPos = (pageWidth - imgWidth) / 2;
-  
+
           doc.addImage(base64data, "JPEG", xPos, 20, imgWidth, imgHeight);
-  
+
           const recordData = [
             ["Record ID", formData.record_id],
             ["Platform", formData.platform],
@@ -132,17 +135,17 @@ function RecordDetail() {
             ["SMM Link", formData.smm_link],
             ["Remarks", formData.remarks],
           ];
-  
+
           autoTable(doc, {
             head: [["Field", "Value"]],
             body: recordData,
-            styles: {
-              font: "NotoSansMalayalam",
-              fontSize: 10,
-            },
+            // styles: {
+            //   font: "NotoSansMalayalam",
+            //   fontSize: 10,
+            // },
             startY: 20 + imgHeight + 10,
           });
-  
+
           doc.save(`record-${formData.record_id}.pdf`);
         };
       };

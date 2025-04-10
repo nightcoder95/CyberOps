@@ -30,12 +30,14 @@ function TopDataCharts() {
   const [smNameData, setSmNameData] = useState(null); // Initially set to null
   const [fromData, setFromData] = useState(null); // Initially set to null
 
+  const API_URL = import.meta.env.DEV
+    ? import.meta.env.VITE_BACKEND_LOCALHOST
+    : import.meta.env.VITE_BACKEND_XCELL;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://172.18.20.63:3000/api/chart_data"
-        );
+        const response = await axios.get(`${API_URL}/api/chart_data`);
 
         // Process response data for Bar chart
         const smNames = response.data.topSMNames.map((item) => item._id);

@@ -33,10 +33,14 @@ function UpdateRecord() {
   };
   const [formData, setFormData] = useState(initialFormData);
 
+  const API_URL = import.meta.env.DEV
+    ? import.meta.env.VITE_BACKEND_LOCALHOST
+    : import.meta.env.VITE_BACKEND_XCELL;
+
   //Using useEffect for getting the user by ID
   useEffect(() => {
     axios
-      .get(`http://172.18.20.63:3000/api/get_record/${id}`)
+      .get(`${API_URL}/api/get_record/${id}`)
       .then((response) => {
         setFormData(response.data);
       })
