@@ -50,7 +50,7 @@ function CreateRecord() {
       try {
         console.log("Fetching data...");
         const response = await axios.get(
-          "http://localhost:3000/api/last_record"
+          "http://172.18.20.63:3000/api/last_record"
         );
         // Update state with the fetched records and total pages
         const result = response.data.lastRecord;
@@ -71,7 +71,7 @@ function CreateRecord() {
     const dataToSend = { ...formData, record_id: lastRecord };
     console.log(dataToSend);
     await axios
-      .post("http://localhost:3000/api/create_record", dataToSend)
+      .post("http://172.18.20.63:3000/api/create_record", dataToSend)
       .then((response) => {
         toast.success(response.data.message);
         setTimeout(() => {

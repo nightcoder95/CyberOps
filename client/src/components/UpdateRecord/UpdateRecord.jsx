@@ -36,7 +36,7 @@ function UpdateRecord() {
   //Using useEffect for getting the user by ID
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/get_record/${id}`)
+      .get(`http://172.18.20.63:3000/api/get_record/${id}`)
       .then((response) => {
         setFormData(response.data);
       })
@@ -53,7 +53,7 @@ function UpdateRecord() {
   const submitForm = async (e) => {
     e.preventDefault();
     await axios
-      .put(`http://localhost:3000/api/update_record/${id}`, formData)
+      .put(`http://172.18.20.63:3000/api/update_record/${id}`, formData)
       .then((response) => {
         toast.success(response.data.message);
         navigate("/data-table");

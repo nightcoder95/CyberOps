@@ -9,6 +9,7 @@ import Navbar from "../HomePage/Navbar";
 import Sidebar from "../HomePage/Sidebar";
 import { InputText } from "primereact/inputtext";
 
+
 function AllRecords() {
   const [records, setRecords] = useState([]); // Stores the records fetched from the backend
   const [isNavClosed, setIsNavClosed] = useState(false);
@@ -44,7 +45,7 @@ function AllRecords() {
       try {
         console.log("Fetching data...");
         const response = await axios.get(
-          "http://localhost:3000/api/get_records"
+          "http://172.18.20.63:3000/api/get_records"
         );
         // Update state with the fetched records and total pages
         setRecords(response.data.records);
@@ -159,9 +160,23 @@ function AllRecords() {
                   }}></Column>
                 <Column
                   sortable
-                  field="reference"
-                  header="Reference"
-                  bodyStyle={{ padding: "10px", textAlign: "left" }}></Column>
+                  field="social"
+                  header="Data from SM"
+                  body={rowData => (
+                    <div
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "200px", // Adjust this width as needed
+                      }}
+                      title={rowData.social} // Tooltip on hover
+                    >
+                      {rowData.social}
+                    </div>
+                  )}
+                  bodyStyle={{ padding: "10px", textAlign: "left" }}
+                />
                 <Column
                   header="Action"
                   body={actionBodyTemplate}

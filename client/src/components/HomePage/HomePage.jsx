@@ -6,16 +6,24 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import axios from "axios";
 import TopDataCharts from "../Charts/TopDataCharts";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 function HomePage() {
   const [isNavClosed, setIsNavClosed] = useState(false);
   const [totalRecords, setTotalRecords] = useState(null);
   const [totalAccounts, setTotalAccounts] = useState(null);
+  const [lastReportDate, setLastReportDate] = useState(null);
+  const [lastUpdateDate, setLastUpdateDate] = useState(null);
+
+  const navigate = useNavigate()
 
   // Effect for getting total records
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/total_records")
+      .get("http://172.18.20.63:3000/api/total_records")
       .then((response) => {
         setTotalRecords(response.data.totalRecords);
       })
@@ -27,9 +35,33 @@ function HomePage() {
   // Effect for getting total distinct social media accounts
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api//total_accounts")
+      .get("http://172.18.20.63:3000/api//total_accounts")
       .then((response) => {
         setTotalAccounts(response.data.totalNames);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+  // Effect to get the latest report date
+  useEffect(() => {
+    axios
+      .get("http://172.18.20.63:3000/api/last_report_date/")
+      .then((response) => {
+        setLastReportDate(response.data.lastReportDate);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  // Effect for getting last updated date
+  useEffect(() => {
+    axios
+      .get("http://172.18.20.63:3000/api/last_updated_date/")
+      .then((response) => {
+        setLastUpdateDate(response.data.lastUpdatedDate);
       })
       .catch((error) => {
         console.error(error);
@@ -56,9 +88,9 @@ function HomePage() {
         <div className="main">
           {/* Cards */}
           <div className="box-container">
-            <div className="box box1">
+            <div className="box box1" onClick={()=> navigate('/data-table')}>
               <div className="text">
-                <h2 className="topic-heading">{totalRecords}</h2>
+                <h2 className="text-2xl font-black ">{totalRecords}</h2>
                 <h2 className="topic">Records</h2>
               </div>
 
@@ -67,38 +99,29 @@ function HomePage() {
 
             <div className="box box2">
               <div className="text">
-                <h2 className="topic-heading">{totalAccounts}</h2>
-                <h2 className="topic">Social Media Accounts</h2>
+                <h2 className="text-2xl font-black ">{totalAccounts}</h2>
+                <h2 className="topic">Unique SM Accounts</h2>
               </div>
 
-              <img
-                src="/account.png"
-                alt="likes"
-              />
+              <img src="/account.png" alt="likes" />
             </div>
 
             <div className="box box3">
               <div className="text">
-                <h2 className="topic-heading">320</h2>
-                <h2 className="topic">Comments</h2>
+                <h2 className="text-2xl font-black ">{lastReportDate}</h2>
+                <h2 className="topic">Last Report Date</h2>
               </div>
 
-              <img
-                src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
-                alt="comments"
-              />
+              <img src="/date.png" alt="comments" />
             </div>
 
             <div className="box box4">
               <div className="text">
-                <h2 className="topic-heading">70</h2>
-                <h2 className="topic">Published</h2>
+                <h2 className="text-2xl font-black ">{lastUpdateDate}</h2>
+                <h2 className="topic">Last Updated</h2>
               </div>
 
-              <img
-                src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png"
-                alt="published"
-              />
+              <img src="/updation.png" alt="published" />
             </div>
           </div>
           {/* Charts Section */}

@@ -1,5 +1,5 @@
 import express from 'express';
-import { createRecord, getAllRecords, getRecordById, updateRecord, deleteRecord, findLastRecord, totalRecords, chartData, totalSMNames } from '../controllers/dataController.js';
+import { createRecord, getAllRecords, getRecordById, updateRecord, deleteRecord, findLastRecord, findLastReportDate, totalRecords, chartData, totalSMNames, getLastUpdatedDate } from '../controllers/dataController.js';
 
 const route = express.Router();
 
@@ -29,5 +29,11 @@ route.get('/chart_data/', chartData)
 
 // route to get all distinct sm_name
 route.get('/total_accounts/', totalSMNames)
+
+// route to get last report date
+route.get('/last_report_date/', findLastReportDate)
+
+// route to get last updated date
+route.get('/last_updated_date/', getLastUpdatedDate)
 
 export default route;

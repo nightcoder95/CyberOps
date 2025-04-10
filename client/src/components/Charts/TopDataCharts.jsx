@@ -11,7 +11,7 @@ import {
   Tooltip,
   Legend,
   ArcElement,
-  Colors
+  Colors,
 } from "chart.js";
 
 // Register necessary components for chart.js
@@ -34,7 +34,7 @@ function TopDataCharts() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/chart_data"
+          "http://172.18.20.63:3000/api/chart_data"
         );
 
         // Process response data for Bar chart
