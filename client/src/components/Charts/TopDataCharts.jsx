@@ -31,8 +31,8 @@ function TopDataCharts() {
   const [fromData, setFromData] = useState(null); // Initially set to null
 
   const API_URL = import.meta.env.DEV
-    ? import.meta.env.VITE_BACKEND_LOCALHOST
-    : import.meta.env.VITE_BACKEND_XCELL;
+    ? import.meta.env.VITE_BACKEND_XCELL
+    : import.meta.env.VITE_BACKEND_LOCALHOST;
 
   useEffect(() => {
     const fetchData = async () => {

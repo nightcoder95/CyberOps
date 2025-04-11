@@ -34,8 +34,8 @@ function UpdateRecord() {
   const [formData, setFormData] = useState(initialFormData);
 
   const API_URL = import.meta.env.DEV
-    ? import.meta.env.VITE_BACKEND_LOCALHOST
-    : import.meta.env.VITE_BACKEND_XCELL;
+    ? import.meta.env.VITE_BACKEND_XCELL
+    : import.meta.env.VITE_BACKEND_LOCALHOST;
 
   //Using useEffect for getting the user by ID
   useEffect(() => {
@@ -57,7 +57,7 @@ function UpdateRecord() {
   const submitForm = async (e) => {
     e.preventDefault();
     await axios
-      .put(`http://172.18.20.63:3000/api/update_record/${id}`, formData)
+      .put(`${API_URL}/api/update_record/${id}`, formData)
       .then((response) => {
         toast.success(response.data.message);
         navigate("/data-table");

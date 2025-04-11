@@ -35,8 +35,8 @@ function CreateRecord() {
   const [formData, setFormData] = useState(initialFormData);
 
   const API_URL = import.meta.env.DEV
-    ? import.meta.env.VITE_BACKEND_LOCALHOST
-    : import.meta.env.VITE_BACKEND_XCELL;
+    ? import.meta.env.VITE_BACKEND_XCELL
+    : import.meta.env.VITE_BACKEND_LOCALHOST;
 
   // function to store the user entered form data to the state variable
   const inputHandler = (e) => {
@@ -204,6 +204,7 @@ function CreateRecord() {
                     defaultValue="facebook">
                     <option value="null"></option>
                     <option value="facebook">Facebook</option>
+                    <option value="official_report">Official Report</option>
                     <option value="signal">Signal</option>
                     <option value="skype">skype</option>
                     <option value="instagram">Instagram</option>
@@ -304,7 +305,7 @@ function CreateRecord() {
               </div>
               <div className="group-7">
                 <div className="form-group social">
-                  <label for="social">Social</label>
+                  <label for="social">Data:SM/Report</label>
                   <textarea
                     onChange={inputHandler}
                     type="text"

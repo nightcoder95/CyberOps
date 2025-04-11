@@ -35,8 +35,8 @@ function RecordDetail() {
   const [formData, setFormData] = useState(initialFormData);
 
   const API_URL = import.meta.env.DEV
-    ? import.meta.env.VITE_BACKEND_LOCALHOST
-    : import.meta.env.VITE_BACKEND_XCELL;
+    ? import.meta.env.VITE_BACKEND_XCELL
+    : import.meta.env.VITE_BACKEND_LOCALHOST;
 
   //Using useEffect for getting the user by ID
   useEffect(() => {
@@ -92,23 +92,24 @@ function RecordDetail() {
   //   doc.save(`record-${formData.record_id}.pdf`);
   // };
 
-  // Function to generate the PDF with image
   const generatePDF = async () => {
     const doc = new jsPDF();
-    // doc.setFont("NotoSansMalayalam");
-    // doc.setFontSize(12);
-    // doc.text("മലയാളം ടെക്സ്റ്റ് റെക്കോർഡ്", 20, 30);
-
+    doc.setFontSize(12);
+    doc.text("Record Details", 20, 15);
+  
     try {
       const imgUrl = `/SMM/${formData.record_id}.jpg`;
       const response = await fetch(imgUrl);
+  
+      if (!response.ok) throw new Error("Image not found");
+  
       const imgBlob = await response.blob();
-
+  
       const reader = new FileReader();
       reader.readAsDataURL(imgBlob);
       reader.onloadend = () => {
         const base64data = reader.result;
-
+  
         const img = new Image();
         img.src = base64data;
         img.onload = () => {
@@ -116,9 +117,9 @@ function RecordDetail() {
           const imgHeight = 100;
           const pageWidth = doc.internal.pageSize.getWidth();
           const xPos = (pageWidth - imgWidth) / 2;
-
+  
           doc.addImage(base64data, "JPEG", xPos, 20, imgWidth, imgHeight);
-
+  
           const recordData = [
             ["Record ID", formData.record_id],
             ["Platform", formData.platform],
@@ -135,24 +136,22 @@ function RecordDetail() {
             ["SMM Link", formData.smm_link],
             ["Remarks", formData.remarks],
           ];
-
+  
           autoTable(doc, {
             head: [["Field", "Value"]],
             body: recordData,
-            // styles: {
-            //   font: "NotoSansMalayalam",
-            //   fontSize: 10,
-            // },
-            startY: 20 + imgHeight + 10,
+            startY: 20 + imgHeight + 20,
           });
-
+  
           doc.save(`record-${formData.record_id}.pdf`);
         };
       };
     } catch (error) {
-      console.error("Error generating PDF:", error);
+      console.error("PDF Generation Error:", error);
+      toast.error("Could not generate PDF. Image might be missing.");
     }
   };
+  
 
   //To get date in DD/MM/YYYY format
   const formatDate = (value) => {
@@ -253,7 +252,7 @@ function RecordDetail() {
                       <span>SMM Link:</span> {formData.smm_link}
                     </p>
                     <p>
-                      <span>Social:</span> {formData.social}
+                      <span>Data SM/Report:</span> {formData.social}
                     </p>
                   </div>
 

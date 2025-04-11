@@ -16,8 +16,8 @@ function AllRecords() {
 
   // TO switch between APIs dynamically
   const API_URL = import.meta.env.DEV
-    ? import.meta.env.VITE_BACKEND_LOCALHOST
-    : import.meta.env.VITE_BACKEND_XCELL;
+    ? import.meta.env.VITE_BACKEND_XCELL
+    : import.meta.env.VITE_BACKEND_LOCALHOST;
 
   // State for global filtering
   const [globalFilter, setGlobalFilter] = useState("");
@@ -163,7 +163,7 @@ function AllRecords() {
                 <Column
                   sortable
                   field="social"
-                  header="Data from SM"
+                  header="Data from SM/Report"
                   body={(rowData) => (
                     <div
                       style={{
