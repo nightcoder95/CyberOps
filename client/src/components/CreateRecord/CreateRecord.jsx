@@ -34,9 +34,7 @@ function CreateRecord() {
   };
   const [formData, setFormData] = useState(initialFormData);
 
-  const API_URL = import.meta.env.DEV
-    ? import.meta.env.VITE_BACKEND_XCELL
-    : import.meta.env.VITE_BACKEND_LOCALHOST;
+  const API_URL = import.meta.env.VITE_BACKEND_XCELL;
 
   // function to store the user entered form data to the state variable
   const inputHandler = (e) => {

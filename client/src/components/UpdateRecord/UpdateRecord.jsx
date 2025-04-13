@@ -33,9 +33,7 @@ function UpdateRecord() {
   };
   const [formData, setFormData] = useState(initialFormData);
 
-  const API_URL = import.meta.env.DEV
-    ? import.meta.env.VITE_BACKEND_XCELL
-    : import.meta.env.VITE_BACKEND_LOCALHOST;
+  const API_URL = import.meta.env.VITE_BACKEND_XCELL;
 
   //Using useEffect for getting the user by ID
   useEffect(() => {

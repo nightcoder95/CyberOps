@@ -17,9 +17,7 @@ function HomePage() {
 
   const navigate = useNavigate();
 
-  const API_URL = import.meta.env.DEV
-    ? import.meta.env.VITE_BACKEND_XCELL
-    : import.meta.env.VITE_BACKEND_LOCALHOST;
+  const API_URL = import.meta.env.VITE_BACKEND_XCELL;
 
   // Effect for getting total records
   useEffect(() => {

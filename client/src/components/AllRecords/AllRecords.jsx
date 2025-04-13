@@ -15,9 +15,7 @@ function AllRecords() {
   const navigate = useNavigate();
 
   // TO switch between APIs dynamically
-  const API_URL = import.meta.env.DEV
-    ? import.meta.env.VITE_BACKEND_XCELL
-    : import.meta.env.VITE_BACKEND_LOCALHOST;
+  const API_URL = import.meta.env.VITE_BACKEND_XCELL;
 
   // State for global filtering
   const [globalFilter, setGlobalFilter] = useState("");
@@ -140,11 +138,13 @@ function AllRecords() {
                   sortable
                   field="record_id"
                   header="ID"
+                  style={{ width: "1%" }}
                   bodyStyle={{ padding: "10px", textAlign: "left" }}></Column>
                 <Column
                   sortable
                   field="report_date"
                   header="Date"
+                  style={{ width: "1%" }}
                   body={(rowData) => formatDate(rowData.report_date)}></Column>
                 <Column
                   sortable
@@ -155,6 +155,7 @@ function AllRecords() {
                   sortable
                   field="sm_name"
                   header="Social Media Name"
+                  style={{ width: "1%" }}
                   bodyStyle={{
                     maxWidth: "50px",
                     padding: "10px",
