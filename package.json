@@ -2,7 +2,8 @@
   "dependencies": {
     "concurrently": "^9.0.0",
     "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.5.28"
+    "jspdf-autotable": "^3.5.28",
+    "jwt-decode": "^4.0.0"
   },
   "scripts": {
     "start": "concurrently \"cd server && npm start\" \"cd client && npm run dev\""

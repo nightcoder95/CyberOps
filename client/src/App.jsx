@@ -6,7 +6,8 @@ import UpdateRecord from "./components/UpdateRecord/UpdateRecord";
 import DeleteRecord from "./components/DeleteRecord/DeleteRecord";
 import RecordDetail from "./components/RecordDetail/RecordDetail";
 import Login from "./components/LoginPage/Login";
-// import Register from "./components/Register/Register.jsx";
+import Register from "./components/RegisterPage/Register";
+import AdminRoute from "./components/LoginPage/AdminRoute.jsx";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import AllRecords from "./components/AllRecords/AllRecords.jsx";
 import "./App.css";
@@ -41,10 +42,14 @@ function App() {
       path: "/",
       element: <Login />,
     },
-    // {
-    //   path: "/register",
-    //   element: <Register/>,
-    // },
+    {
+      path: "/register",
+      element: (
+        <AdminRoute>
+          <Register />
+        </AdminRoute>
+      ),
+    },
   ]);
   return (
     <>

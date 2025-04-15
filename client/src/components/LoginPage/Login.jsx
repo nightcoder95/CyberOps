@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { jwtDecode } from "jwt-decode";
+
 export default function LoginPage() {
   const [pen, setPen] = useState("");
   const [password, setPassword] = useState("");
@@ -16,10 +19,15 @@ export default function LoginPage() {
         pen,
         password,
       });
-      localStorage.setItem("token", response.data.token);
+      const token = response.data.token;
+      const decoded = jwtDecode(token);
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", decoded.role);
       navigate("/dashboard");
+      toast.success(response.data.message);
     } catch (error) {
       setError(error.response.data.message);
+      toast.success(error);
     }
   };
 
@@ -75,7 +83,9 @@ export default function LoginPage() {
             <a href="#" className="text-blue-700 hover:underline font-bold">
               Forgot password?
             </a>
-            <a href="#" className="text-gray-600 font-bold hover:text-gray-800">
+            <a
+              href="/register"
+              className="text-gray-600 font-bold hover:text-gray-800">
               Register
             </a>
           </div>

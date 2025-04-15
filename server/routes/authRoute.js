@@ -4,7 +4,7 @@ import { verifyToken, isAdmin } from '../middleware/authMiddleware.js';
 
 const authRoute = express.Router();
 
-authRoute.post('/register', registerUser); // only Admins can create users
+authRoute.post('/register', verifyToken, isAdmin, registerUser); // only Admins can create users
 authRoute.post('/login', loginUser); // open to all
 
 // A basic protected route which will verify the token on each request
