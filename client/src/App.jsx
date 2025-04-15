@@ -5,17 +5,16 @@ import CreateRecord from "./components/CreateRecord/CreateRecord.jsx";
 import UpdateRecord from "./components/UpdateRecord/UpdateRecord";
 import DeleteRecord from "./components/DeleteRecord/DeleteRecord";
 import RecordDetail from "./components/RecordDetail/RecordDetail";
-// import Login from "./components/Login/Login";
+import Login from "./components/LoginPage/Login";
 // import Register from "./components/Register/Register.jsx";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import AllRecords from "./components/AllRecords/AllRecords.jsx";
-import './App.css';
-
+import "./App.css";
 
 function App() {
   const route = createBrowserRouter([
     {
-      path: "/",
+      path: "/dashboard",
       element: <HomePage />,
     },
     {
@@ -38,10 +37,10 @@ function App() {
       path: "/record-detail/:id",
       element: <RecordDetail />,
     },
-    // {
-    //   path: "/login",
-    //   element: <Login />,
-    // },
+    {
+      path: "/",
+      element: <Login />,
+    },
     // {
     //   path: "/register",
     //   element: <Register/>,

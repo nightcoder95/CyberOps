@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import route from './routes/dataRoute.js'
+import authRoute from './routes/authRoute.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
@@ -13,6 +14,7 @@ app.use(cors());
 dotenv.config();
 
 app.use('/api', route)
+app.use('/auth', authRoute)
 
 
 app.use(cors({

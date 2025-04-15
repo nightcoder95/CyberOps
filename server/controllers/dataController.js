@@ -5,51 +5,6 @@ import jwt from 'jsonwebtoken';
 
 
 
-// Function to handle Sign Up
-export const signupUser = async (req, res) => {
-    const newUser = new User(req.body);
-    const { pen } = newUser
-    try {
-        // Check whether the user already exists
-        const userExist = await User.findOne({ pen })
-        if (userExist) {
-            return res.status(400).json({ message: "User already exists" });
-        }
-        // Create a new user
-        const saveUser = await newUser.save()
-        res.status(200).json({ message: "User created successfully" })
-
-    } catch (error) {
-        res.status(500).json(error.message)
-    }
-}
-
-
-// Function to handle user Login
-export const loginUser = async (req, res) => {
-    const { pen, password } = req.body
-    try {
-        // We look up the user in the database using their pen.
-        const user = await User.findOne({ pen })
-        if (!user) {
-            return res.status(400).json({ message: "Invalid PEN or password" });
-        }
-        // We use bcrypt.compare() to check if the provided password matches the stored hashed password.
-        const matchPassword = await bcrypt.compare(password, user.password)
-        if (!matchPassword) {
-            return res.status(400).json({ message: "Invalid PEN or password" });
-        }
-        // If the passwords match, we generate a token using jwt.sign(). The token contains the user's unique ID and is signed with a secret key (your_jwt_secret). This secret key should be stored securely in environment variables.
-        const token = jwt.sign({ id: user._id }, 'your_jwt_secret', { expiresIn: '1h' })
-
-        // Send the token to the client
-        res.status(200).json({ token })
-
-    } catch (error) {
-        res.status(500).json(error.message)
-    }
-}
-
 //Function for creating a record
 export const createRecord = async (req, res) => {
     try {

@@ -1,6 +1,7 @@
 import express from 'express';
 import { createRecord, getAllRecords, getRecordById, updateRecord, deleteRecord, findLastRecord, findLastReportDate, totalRecords, chartData, totalSMNames, getLastUpdatedDate } from '../controllers/dataController.js';
 
+
 const route = express.Router();
 
 //New record will be create in http://localhost:3000/api/create_record . "/api" is mentioned in index.js
@@ -35,5 +36,7 @@ route.get('/last_report_date/', findLastReportDate)
 
 // route to get last updated date
 route.get('/last_updated_date/', getLastUpdatedDate)
+
+
 
 export default route;
