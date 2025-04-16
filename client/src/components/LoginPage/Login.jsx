@@ -44,7 +44,7 @@ export default function LoginPage() {
             Login to SMPMS
           </h4>
           <p className="text-sm text-gray-600 font-semibold dark:text-gray-800 mt-1">
-            Social Media Profile Management System
+            Social Media Profile Monitoring System
           </p>
         </div>
 

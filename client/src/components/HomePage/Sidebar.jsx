@@ -25,6 +25,17 @@ function Sidebar({ isNavClosed }) {
               <img src="/dashboard.png" className="nav-img" alt="dashboard" />
               <h3>Dashboard</h3>
             </div>
+            <div
+              className={`nav-option ${
+                activeOption === "option3" ? "active" : ""
+              }`}
+              onClick={() => {
+                handleOptionClick("option3");
+                navigate("/data-table");
+              }}>
+              <img src="/dataTable.png" className="nav-img" alt="report" />
+              <h3>View Data Table</h3>
+            </div>
 
             <div
               className={`nav-option ${
@@ -36,18 +47,6 @@ function Sidebar({ isNavClosed }) {
               }}>
               <img src="/create.png" className="nav-img" alt="articles" />
               <h3>Create Record</h3>
-            </div>
-
-            <div
-              className={`nav-option ${
-                activeOption === "option3" ? "active" : ""
-              }`}
-              onClick={() => {
-                handleOptionClick("option3");
-                navigate("/data-table");
-              }}>
-              <img src="/dataTable.png" className="nav-img" alt="report" />
-              <h3>Data Table</h3>
             </div>
 
             {/* <div className="nav-option option4" onclick="selectOption(this)">
