@@ -61,20 +61,18 @@ function AllRecords() {
   // Custom template for the action buttons(view, edit, delete)
   const actionBodyTemplate = (rowData) => {
     return (
-      <div className="card flex justify-content-center">
+      <div className="card flex gap-9 items-center justify-center">
         {/* Since rowData contains all the data from the backend, rowData._id is necessary instead of mapping through records */}
-        <Button
-          label="View"
-          link
+        <button
           onClick={() => window.open(`/record-detail/${rowData._id}`, "_blank")}
-          style={{ marginRight: "15px" }}
-        />
-        <Button
-          label="Edit"
-          link
+          className="hover:scale-110 transition-transform">
+          <img src="/view.png" alt="View" className="w-7 h-7" />
+        </button>
+        <button
           onClick={() => window.open(`/update-record/${rowData._id}`, "_blank")}
-          style={{ marginRight: "15px" }}
-        />
+          className="hover:scale-110 transition-transform">
+          <img src="/edit.png" alt="Edit" className="w-7 h-7" />
+        </button>
 
         {/* <Button
           label="Delete"
@@ -139,7 +137,7 @@ function AllRecords() {
                   field="record_id"
                   header="ID"
                   style={{ width: "1%" }}
-                  bodyStyle={{ padding: "10px", textAlign: "left" }}></Column>
+                  bodyStyle={{ padding: "10px", textAlign: "center" }}></Column>
                 <Column
                   sortable
                   field="report_date"
@@ -165,13 +163,14 @@ function AllRecords() {
                   sortable
                   field="social"
                   header="Data from SM/Report"
+                  headerStyle={{ textAlign: "right" }}
                   body={(rowData) => (
                     <div
                       style={{
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
-                        maxWidth: "200px", // Adjust this width as needed
+                        maxWidth: "680px", // Adjust this width as needed
                       }}
                       title={rowData.social} // Tooltip on hover
                     >
@@ -181,9 +180,10 @@ function AllRecords() {
                   bodyStyle={{ padding: "10px", textAlign: "left" }}
                 />
                 <Column
-                  header="Action"
+                  header="View Edit"
+                  headerStyle={{ textAlign: "right" }}
                   body={actionBodyTemplate}
-                  bodyStyle={{ padding: "10px", textAlign: "left" }}></Column>
+                  bodyStyle={{ padding: "8px", textAlign: "left" }}></Column>
               </DataTable>
             </div>
           </div>
