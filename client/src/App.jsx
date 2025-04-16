@@ -11,36 +11,61 @@ import AdminRoute from "./components/LoginPage/AdminRoute.jsx";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import AllRecords from "./components/AllRecords/AllRecords.jsx";
 import "./App.css";
+import ProtectedRoute from "./components/LoginPage/ProtectedRoute.jsx";
 
 function App() {
   const route = createBrowserRouter([
     {
+      path: "/",
+      element: <Login />,
+    },
+    {
       path: "/dashboard",
-      element: <HomePage />,
+      element: (
+        <ProtectedRoute>
+          <HomePage />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/data-table",
-      element: <AllRecords />,
+      element: (
+        <ProtectedRoute>
+          <AllRecords />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/create-record",
-      element: <CreateRecord />,
+      element: (
+        <ProtectedRoute>
+          <CreateRecord />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/update-record/:id",
-      element: <UpdateRecord />,
+      element: (
+        <ProtectedRoute>
+          <UpdateRecord />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/delete-record/:id",
-      element: <DeleteRecord />,
+      element: (
+        <ProtectedRoute>
+          <DeleteRecord />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/record-detail/:id",
-      element: <RecordDetail />,
-    },
-    {
-      path: "/",
-      element: <Login />,
+      element: (
+        <ProtectedRoute>
+          <RecordDetail />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/register",
@@ -51,6 +76,7 @@ function App() {
       ),
     },
   ]);
+
   return (
     <>
       <div className="">

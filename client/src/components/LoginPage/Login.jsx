@@ -23,6 +23,8 @@ export default function LoginPage() {
       const decoded = jwtDecode(token);
       localStorage.setItem("token", token);
       localStorage.setItem("role", decoded.role);
+      // After login, store the user info (including role) in localStorage or context.
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/dashboard");
       toast.success(response.data.message);
     } catch (error) {
@@ -79,7 +81,7 @@ export default function LoginPage() {
             Log in
           </button>
 
-          <div className="flex justify-between items-center mt-4 text-sm">
+          {/* <div className="flex justify-between items-center mt-4 text-sm">
             <a href="#" className="text-blue-700 hover:underline font-bold">
               Forgot password?
             </a>
@@ -88,7 +90,7 @@ export default function LoginPage() {
               className="text-gray-600 font-bold hover:text-gray-800">
               Register
             </a>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>

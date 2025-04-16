@@ -20,13 +20,23 @@ export default function RegisterPage() {
     }
 
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, {
-        pen,
-        password,
-        role,
-      });
+      // Get token from localStorage
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${API_URL}/auth/register`,
+        {
+          pen,
+          password,
+          role,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       toast.success(response.data.message || "Registered successfully!");
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       toast.error(error.response?.data?.message || "Registration failed!");
     }
@@ -39,8 +49,9 @@ export default function RegisterPage() {
         style={{ backgroundColor: "#F5EFFF" }}>
         <div className="text-center mb-6">
           <img className="mx-auto w-20" src="kplogo.png" alt="logo" />
-          <h4 className="mt-4 text-xl font-semibold text-gray-800">
-            Register for SMPMS
+          <h1 className="mt-4 text-2xl font-semibold text-gray-800">SMPMS</h1>
+          <h4 className="mt-3 text-xl font-semibold text-gray-800">
+            User Registration
           </h4>
           <p className="text-sm text-gray-600 font-semibold">
             Create your account
@@ -64,14 +75,16 @@ export default function RegisterPage() {
             <label className="block mb-1 text-sm font-bold text-gray-700">
               Role
             </label>
-            <input
-              type="text"
+            <select
               className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
-              placeholder="Your Role"
               value={role}
-              onChange={(e) => setRole(e.target.value)}
-            />
+              onChange={(e) => setRole(e.target.value)}>
+              <option value="">Select a role</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
           </div>
+
           <div className="mb-4">
             <label className="block mb-1 text-sm font-bold text-gray-700">
               Password
@@ -107,7 +120,7 @@ export default function RegisterPage() {
           <div className="mt-4 text-sm text-center">
             <p className="text-gray-600 font-bold">
               Already have an account?{" "}
-              <a href="/login" className="text-blue-700 hover:underline">
+              <a href="/" className="text-blue-700 hover:underline">
                 Log in
               </a>
             </p>

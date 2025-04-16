@@ -19,7 +19,7 @@ function UpdateRecord() {
     dbid: "",
     type_01: "",
     type_02: "",
-    type_03: "",
+    dat: "",
     platform: "",
     from: "",
     report_date: "",
@@ -159,28 +159,12 @@ function UpdateRecord() {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="type_02">Type 02</label>
+                  <label htmlFor="type_02">Type 2</label>
                   <select
                     onChange={inputHandler}
-                    value={formData.type_02}
                     id="type_02"
+                    value={formData.type_02}
                     name="type_02">
-                    <option value="null"></option>
-                    <option value="Radical / Fundaments">
-                      Radical / Fundaments
-                    </option>
-                    <option value="LWE">LWE</option>
-                    <option value="Organized Crimes">Organized Crimes</option>
-                    <option value="Others">Others</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="type_03">Type 03</label>
-                  <select
-                    onChange={inputHandler}
-                    id="type_03"
-                    value={formData.type_03}
-                    name="type_03">
                     <option value="null"></option>
                     <option value="	Defamatory post which may cause L/O issue">
                       {" "}
@@ -191,6 +175,20 @@ function UpdateRecord() {
                     </option>
                     <option value="Cyber Frauds">Cyber Frauds</option>
                     <option value="Sexually abusive">Sexually abusive</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="dat">DAT</label>
+                  <select
+                    onChange={inputHandler}
+                    value={formData.dat}
+                    id="dat"
+                    name="dat">
+                    <option value="null"></option>
+                    <option value="Dat 1">Dat 1</option>
+                    <option value="Dat 2">Dat 2</option>
+                    <option value="Dat 3">Dat 3</option>
+                    <option value="Dat 4">Dat 4</option>
                   </select>
                 </div>
               </div>

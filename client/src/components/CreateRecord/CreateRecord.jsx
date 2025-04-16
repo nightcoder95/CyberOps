@@ -20,7 +20,7 @@ function CreateRecord() {
     dbid: "",
     type_01: "",
     type_02: "",
-    type_03: "",
+    dat: "",
     platform: "",
     from: "",
     report_date: "",
@@ -97,7 +97,7 @@ function CreateRecord() {
         <div className="main">
           {/* Form */}
           <div className="form-container">
-            <h2 className="create-heading">Create Record</h2>
+            <h2 className="create-heading font-bold text-xl">Create Record</h2>
             <form className="data-form" onSubmit={submitForm}>
               <div className="group-1">
                 <div className="form-group">
@@ -164,21 +164,10 @@ function CreateRecord() {
                     <option value="Others">Others</option>
                   </select>
                 </div>
+
                 <div className="form-group">
                   <label for="type_02">Type 02</label>
                   <select onChange={inputHandler} id="type_02" name="type_02">
-                    <option value="null"></option>
-                    <option value="Radical / Fundaments">
-                      Radical / Fundaments
-                    </option>
-                    <option value="LWE">LWE</option>
-                    <option value="Organized Crimes">Organized Crimes</option>
-                    <option value="Others">Others</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label for="type_03">Type 03</label>
-                  <select onChange={inputHandler} id="type_03" name="type_03">
                     <option value="null"></option>
                     <option value="	Defamatory post which may cause L/O issue">
                       {" "}
@@ -189,6 +178,16 @@ function CreateRecord() {
                     </option>
                     <option value="Cyber Frauds">Cyber Frauds</option>
                     <option value="Sexually abusive">Sexually abusive</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label for="dat">DAT</label>
+                  <select onChange={inputHandler} id="dat" name="dat">
+                    <option value="null"></option>
+                    <option value="Dat 1">Dat 1</option>
+                    <option value="Dat 2">Dat 2</option>
+                    <option value="Dat 3">Dat 3</option>
+                    <option value="Dat 4">Dat 4</option>
                   </select>
                 </div>
               </div>

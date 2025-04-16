@@ -35,7 +35,7 @@ const dataSchema = new mongoose.Schema({
     // enum: ['null','Type A', 'Type B', 'Type C'], // Replace with actual options
 
   },
-  type_03: {
+  dat: {
     type: String,
     // enum: ['null','Type A', 'Type B', 'Type C'], // Replace with actual options
 

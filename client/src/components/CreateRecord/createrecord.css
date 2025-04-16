@@ -1,8 +1,8 @@
 /* Form Container Styling */
 .form-container {
   width: 80%;
-  max-width: 800px;
-  margin:0px auto 20px; /* Space for Navbar */
+  max-width: 1500px;
+  margin: 0px auto 20px; /* Space for Navbar */
   padding: 20px;
   background-color: var(--background-color2);
   border-radius: 8px;
@@ -36,11 +36,11 @@
   display: flex;
   flex-direction: column;
 }
-.link{
-  min-width: 600px;
+.link {
+  min-width: 900px;
 }
-.social{
-  min-width: 700px;
+.social {
+  min-width: 1000px;
 }
 
 .form-group label {
@@ -92,11 +92,11 @@ button[type="submit"]:hover {
   }
 
   .form-container {
-    width: 90%;
+    width: 100%;
   }
 }
 
-.create-heading{
+.create-heading {
   color: var(--secondary-color);
   padding-bottom: 15px;
 }

@@ -1,14 +1,16 @@
+// components/AdminRoute.jsx
 import { Navigate } from "react-router-dom";
 
-const AdminRoute = ({ children }) => {
+// This will be used to protect the admin route
+export default function AdminRoute({ children }) {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
 
   if (!token || role !== "admin") {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" />;
   }
 
   return children;
-};
+}
 
-export default AdminRoute;
+

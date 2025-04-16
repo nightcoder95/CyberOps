@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar({ handleMenuClick }) {
+  // const user = JSON.parse(localStorage.getItem("user"));
   return (
     <>
       <header>
@@ -29,6 +31,10 @@ function Navbar({ handleMenuClick }) {
               alt="search-icon"
             />
           </div>
+        </div> */}
+
+        {/* <div className="notification">
+          {user.role === "admin" && <Link to="/register">Create New User</Link>}
         </div> */}
 
         <div className="message">

@@ -20,7 +20,7 @@ function RecordDetail() {
     dbid: "",
     type_01: "",
     type_02: "",
-    type_03: "",
+    dat: "",
     platform: "",
     from: "",
     report_date: "",
@@ -33,7 +33,7 @@ function RecordDetail() {
     remarks: "",
   };
   const [formData, setFormData] = useState(initialFormData);
-  
+
   const API_URL = import.meta.env.VITE_BACKEND_XCELL;
 
   //Using useEffect for getting the user by ID
@@ -94,20 +94,20 @@ function RecordDetail() {
     const doc = new jsPDF();
     doc.setFontSize(12);
     doc.text("Record Details", 20, 15);
-  
+
     try {
       const imgUrl = `/SMM/${formData.record_id}.jpg`;
       const response = await fetch(imgUrl);
-  
+
       if (!response.ok) throw new Error("Image not found");
-  
+
       const imgBlob = await response.blob();
-  
+
       const reader = new FileReader();
       reader.readAsDataURL(imgBlob);
       reader.onloadend = () => {
         const base64data = reader.result;
-  
+
         const img = new Image();
         img.src = base64data;
         img.onload = () => {
@@ -115,15 +115,15 @@ function RecordDetail() {
           const imgHeight = 100;
           const pageWidth = doc.internal.pageSize.getWidth();
           const xPos = (pageWidth - imgWidth) / 2;
-  
+
           doc.addImage(base64data, "JPEG", xPos, 20, imgWidth, imgHeight);
-  
+
           const recordData = [
             ["Record ID", formData.record_id],
             ["Platform", formData.platform],
             ["Type 01", formData.type_01],
             ["Type 02", formData.type_02],
-            ["Type 03", formData.type_03],
+            ["dat", formData.dat],
             ["Report Date", formData.report_date],
             ["From", formData.from],
             ["Reference", formData.reference],
@@ -134,13 +134,13 @@ function RecordDetail() {
             ["SMM Link", formData.smm_link],
             ["Remarks", formData.remarks],
           ];
-  
+
           autoTable(doc, {
             head: [["Field", "Value"]],
             body: recordData,
             startY: 20 + imgHeight + 20,
           });
-  
+
           doc.save(`record-${formData.record_id}.pdf`);
         };
       };
@@ -149,7 +149,6 @@ function RecordDetail() {
       toast.error("Could not generate PDF. Image might be missing.");
     }
   };
-  
 
   //To get date in DD/MM/YYYY format
   const formatDate = (value) => {
@@ -197,7 +196,7 @@ function RecordDetail() {
                       <span>Type 02:</span> {formData.type_02}
                     </p>
                     <p>
-                      <span>Type 03:</span> {formData.type_03}
+                      <span>Dat: </span> {formData.dat}
                     </p>
                     {/* <p>
                       <span>Type:</span> {formData.type}
