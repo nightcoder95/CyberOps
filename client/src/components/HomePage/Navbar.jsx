@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ProfileMenu from "./ProfileMenu";
 
 function Navbar({ handleMenuClick }) {
   // const user = JSON.parse(localStorage.getItem("user"));
@@ -37,11 +38,12 @@ function Navbar({ handleMenuClick }) {
           {user.role === "admin" && <Link to="/register">Create New User</Link>}
         </div> */}
 
-        <div className="message">
+        {/* <div className="message">
           <div className="dp">
             <img src="/user.png" className="dpicn" alt="dp" />
           </div>
-        </div>
+        </div> */}
+        <ProfileMenu/>
       </header>
     </>
   );
