@@ -176,35 +176,44 @@ export const totalRecords = async (req, res) => {
 
 export const totalSMNames = async (req, res) => {
     try {
-      const result = await SocialData.aggregate([
-        {
-          $sort: { _id: -1 }, // Sort by newest first (assuming _id increases with time)
-        },
-        {
-          $group: {
-            _id: "$sm_name",
-            latestLink: { $first: "$link" },
-          },
-        },
-        {
-          $project: {
-            sm_name: "$_id",
-            link: "$latestLink",
-            _id: 0,
-          },
-        },
-      ]);
-  
-      res.status(200).json({
-        totalNames: result.length,
-        data: result,
-        message: "Successfully retrieved all distinct sm_names with their latest links",
-      });
+        const result = await SocialData.aggregate([
+            {
+                $match: {
+                    sm_name: { $ne: "", $ne: null },
+                    link: { $ne: "", $ne: null },
+                },
+            },
+            {
+                $sort: { _id: -1 }, // Ensure latest link is first
+            },
+            {
+                $group: {
+                    _id: "$sm_name",
+                    latestLink: { $first: "$link" },
+                    totalRecords: { $sum: 1 },
+                },
+            },
+            {
+                $project: {
+                    sm_name: "$_id",
+                    link: "$latestLink",
+                    totalRecords: 1,
+                    _id: 0,
+                },
+            },
+        ]);
+
+        res.status(200).json({
+            totalNames: result.length,
+            data: result,
+            message: "Successfully retrieved all distinct sm_names with their latest links and counts",
+        });
     } catch (error) {
-      res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
-  };
-  
+};
+
+
 
 
 /**

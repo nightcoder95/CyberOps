@@ -74,16 +74,47 @@ const AllProfiles = () => {
                 paginatorTemplate="RowsPerPageDropdown CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink">
                 <Column
                   sortable
+                  field="totalRecords"
+                  header="Total Records"
+                  bodyStyle={{ padding: "10px", textAlign: "left" }}
+                  body={(rowData) => (
+                    <div
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "50px", // Adjust this width as needed
+                      }}
+                      title={rowData.totalRecords} // Tooltip on hover
+                    >
+                      {rowData.totalRecords}
+                    </div>
+                  )}
+                />
+                <Column
+                  sortable
                   field="sm_name"
                   header="SM Account"
-                  style={{ width: "1%" }}
-                  bodyStyle={{ padding: "10px", textAlign: "center" }}/>
+                  bodyStyle={{ padding: "10px", textAlign: "left" }}
+                  body={(rowData) => (
+                    <div
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "400px", // Adjust this width as needed
+                      }}
+                      title={rowData.sm_name} // Tooltip on hover
+                    >
+                      {rowData.sm_name}
+                    </div>
+                  )}
+                />
                 <Column
                   sortable
                   field="link"
                   header="Link"
-                  style={{ width: "1%" }}
-                  bodyStyle={{ padding: "10px", textAlign: "center" }}
+                  bodyStyle={{ padding: "10px", textAlign: "left" }}
                   body={(rowData) => (
                     <div
                       style={{
@@ -97,9 +128,7 @@ const AllProfiles = () => {
                       {rowData.link}
                     </div>
                   )}
-                  
-                  />
-                    
+                />
               </DataTable>
             </div>
           </div>

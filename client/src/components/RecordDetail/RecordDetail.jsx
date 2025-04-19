@@ -142,7 +142,7 @@ function RecordDetail() {
             startY: 20 + imgHeight + 20,
           });
 
-          doc.save(`record-${formData.record_id}.pdf`);
+          doc.save(`SMPMS-${formData.record_id}.pdf`);
         };
       };
     } catch (error) {
@@ -183,7 +183,6 @@ function RecordDetail() {
                 />
               </div> */}
               <FileViewer recordId={formData.record_id} />
-
 
               <div className="details-container">
                 <div className="section-1">
