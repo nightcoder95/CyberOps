@@ -7,6 +7,7 @@ import Navbar from "../HomePage/Navbar";
 import Sidebar from "../HomePage/Sidebar";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import FileViewer from "./FileViewer";
 // import "../../fonts/NotoSansMalayalam";
 
 function RecordDetail() {
@@ -174,13 +175,15 @@ function RecordDetail() {
             </div>
 
             <div className="content">
-              <div className="image-container">
+              {/* <div className="image-container">
                 <img
                   src={`/SMM/${formData.record_id}.jpg`}
                   alt="Image missing"
                   className="image"
                 />
-              </div>
+              </div> */}
+              <FileViewer recordId={formData.record_id} />
+
 
               <div className="details-container">
                 <div className="section-1">

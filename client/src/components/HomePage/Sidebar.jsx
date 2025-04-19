@@ -22,7 +22,11 @@ function Sidebar({ isNavClosed }) {
                 handleOptionClick("option1");
                 navigate("/dashboard");
               }}>
-              <img src="/dashboard.png" className="nav-img" alt="dashboard" />
+              <img
+                src="/dashboard.png"
+                className="nav-img w-10 h-10"
+                alt="dashboard"
+              />
               <h3>Dashboard</h3>
             </div>
             <div
@@ -33,7 +37,11 @@ function Sidebar({ isNavClosed }) {
                 handleOptionClick("option3");
                 navigate("/data-table");
               }}>
-              <img src="/dataTable.png" className="nav-img" alt="report" />
+              <img
+                src="/dataTable.png"
+                className="nav-img w-10 h-10"
+                alt="report"
+              />
               <h3>View Data Table</h3>
             </div>
 
@@ -45,7 +53,11 @@ function Sidebar({ isNavClosed }) {
                 handleOptionClick("option2");
                 navigate("/create-record");
               }}>
-              <img src="/create.png" className="nav-img" alt="articles" />
+              <img
+                src="/create.png"
+                className="nav-img w-10 h-10"
+                alt="articles"
+              />
               <h3>Create Record</h3>
             </div>
 
