@@ -180,7 +180,7 @@ function AllRecords() {
                   bodyStyle={{ padding: "10px", textAlign: "left" }}
                 />
                 <Column
-                  header="View Edit"
+                  header="View / Edit"
                   headerStyle={{ textAlign: "right" }}
                   body={actionBodyTemplate}
                   bodyStyle={{ padding: "8px", textAlign: "left" }}></Column>
