@@ -96,7 +96,7 @@ function HomePage() {
               <img src="/records.png" alt="Views" />
             </div>
 
-            <div className="box box2">
+            <div className="box box2" onClick={() => navigate("/all-profiles")}>
               <div className="text">
                 <h2 className="text-2xl font-black ">{totalAccounts}</h2>
                 <h2 className="topic">Unique SM Accounts</h2>

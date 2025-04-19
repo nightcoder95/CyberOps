@@ -153,24 +153,58 @@ export const totalRecords = async (req, res) => {
 }
 
 //function to find all the distinct sm_name in database
+// export const totalSMNames = async (req, res) => {
+//     try {
+//         // Use the distinct method to get unique sm_names
+//         const distinctSMNames = await SocialData.distinct("sm_name")
+
+//         // Get the count of distinct sm_names
+//         const totalDistinctSMNames = distinctSMNames.length;
+
+//         // Send the result as a response
+//         res.status(200).json({
+//             totalNames: totalDistinctSMNames,
+//             message: "Successfully retrieved total number of distinct sm_names"
+//         });
+
+//     } catch (error) {
+//         res.status(500).json(error.message)
+//     }
+// }
+
+//function to find all the distinct sm_name in database and return all distinct sm_name values with their latest link (based on insertion)
+
 export const totalSMNames = async (req, res) => {
     try {
-        // Use the distinct method to get unique sm_names
-        const distinctSMNames = await SocialData.distinct("sm_name")
-
-        // Get the count of distinct sm_names
-        const totalDistinctSMNames = distinctSMNames.length;
-
-        // Send the result as a response
-        res.status(200).json({
-            totalNames: totalDistinctSMNames,
-            message: "Successfully retrieved total number of distinct sm_names"
-        });
-
+      const result = await SocialData.aggregate([
+        {
+          $sort: { _id: -1 }, // Sort by newest first (assuming _id increases with time)
+        },
+        {
+          $group: {
+            _id: "$sm_name",
+            latestLink: { $first: "$link" },
+          },
+        },
+        {
+          $project: {
+            sm_name: "$_id",
+            link: "$latestLink",
+            _id: 0,
+          },
+        },
+      ]);
+  
+      res.status(200).json({
+        totalNames: result.length,
+        data: result,
+        message: "Successfully retrieved all distinct sm_names with their latest links",
+      });
     } catch (error) {
-        res.status(500).json(error.message)
+      res.status(500).json({ message: error.message });
     }
-}
+  };
+  
 
 
 /**

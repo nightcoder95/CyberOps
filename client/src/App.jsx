@@ -12,6 +12,7 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import AllRecords from "./components/AllRecords/AllRecords.jsx";
 import "./App.css";
 import ProtectedRoute from "./components/LoginPage/ProtectedRoute.jsx";
+import AllProfiles from "./components/AllProfiles/AllProfiles.jsx";
 
 function App() {
   const route = createBrowserRouter([
@@ -32,6 +33,14 @@ function App() {
       element: (
         <ProtectedRoute>
           <AllRecords />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/all-profiles",
+      element: (
+        <ProtectedRoute>
+          <AllProfiles />
         </ProtectedRoute>
       ),
     },
