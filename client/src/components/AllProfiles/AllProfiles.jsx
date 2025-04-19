@@ -75,7 +75,7 @@ const AllProfiles = () => {
                 <Column
                   sortable
                   field="totalRecords"
-                  header="Total Records"
+                  header="Count"
                   bodyStyle={{ padding: "10px", textAlign: "left" }}
                   body={(rowData) => (
                     <div
