@@ -47,3 +47,22 @@ export const getAllUsers = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+// function to update user data
+export const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const { pen, password, role, name } = req.body
+        const updateData = { pen, role, name }
+        if (password) {
+            updateData.password = await bcrypt.hash(password, 10)
+        }
+        const user = await User.findByIdAndUpdate(id, updateData, { new: true }).select('-password');
+        if (!user) {
+            return res.status(404).json({ message: "User not found" })
+        }
+        res.status(200).json({ message: 'User updated successfully', user });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}

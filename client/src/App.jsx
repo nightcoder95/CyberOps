@@ -13,6 +13,7 @@ import AllRecords from "./components/AllRecords/AllRecords.jsx";
 import "./App.css";
 import ProtectedRoute from "./components/LoginPage/ProtectedRoute.jsx";
 import AllProfiles from "./components/AllProfiles/AllProfiles.jsx";
+import UserManagement from "./components/UserManagement/UserManagement.jsx";
 
 function App() {
   const route = createBrowserRouter([
@@ -81,6 +82,14 @@ function App() {
       element: (
         <AdminRoute>
           <Register />
+        </AdminRoute>
+      ),
+    },
+    {
+      path: "/users",
+      element: (
+        <AdminRoute>
+          <UserManagement />
         </AdminRoute>
       ),
     },

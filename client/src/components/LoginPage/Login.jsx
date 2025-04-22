@@ -15,6 +15,7 @@ export default function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      console.log("Request headers:", axios.defaults.headers.common); // Log headers
       const response = await axios.post(`${API_URL}/auth/login`, {
         pen,
         password,
@@ -23,13 +24,13 @@ export default function LoginPage() {
       const decoded = jwtDecode(token);
       localStorage.setItem("token", token);
       localStorage.setItem("role", decoded.role);
-      // After login, store the user info (including role) in localStorage or context.
       localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/dashboard");
       toast.success(response.data.message);
     } catch (error) {
-      setError(error.response.data.message);
-      toast.success(error);
+      console.error("Login error:", error.response?.data); // Log full error
+      setError(error.response?.data?.message || "Login failed");
+      toast.error(error.response?.data?.message || "Login failed");
     }
   };
 

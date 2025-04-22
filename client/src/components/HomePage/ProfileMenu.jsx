@@ -36,11 +36,15 @@ const ProfileMenu = () => {
         <div className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
           <div className="py-1 text-sm text-gray-700">
             {isAdmin && (
-              <button
+              <div className="">
+                <button
                 onClick={handleRegister}
                 className="block w-full px-4 py-2 text-left hover:bg-gray-100">
                 Register New User
               </button>
+              <a href="/users" className="block w-full px-4 py-2 text-left hover:bg-gray-100">Manage Users</a>
+              </div>
+              
             )}
             <button
               onClick={handleLogout}

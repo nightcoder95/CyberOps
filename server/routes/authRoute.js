@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, loginUser, getAllUsers } from '../controllers/userController.js';
+import { registerUser, loginUser, getAllUsers, updateUser } from '../controllers/userController.js';
 import { verifyToken, isAdmin } from '../middleware/authMiddleware.js';
 
 const authRoute = express.Router();
@@ -12,6 +12,9 @@ authRoute.get('/protected', verifyToken, (req, res) => res.status(200).json({ me
 
 // A route to get all users
 authRoute.get('/users', verifyToken, isAdmin, getAllUsers);
+
+// route to update user
+authRoute.put('/users/:id', verifyToken, isAdmin, updateUser);
 
 
 export default authRoute;

@@ -117,13 +117,12 @@ export default function RegisterPage() {
             Register
           </button>
 
-          <div className="mt-4 text-sm text-center">
-            <p className="text-gray-600 font-bold">
-              Already have an account?{" "}
-              <a href="/" className="text-blue-700 hover:underline">
-                Log in
-              </a>
-            </p>
+          <div className="mt-4 text-base text-center">
+            <a
+              href="/dashboard"
+              class=" w-full h-15 overflow-hidden rounded bg-red-700 px-5 py-2.5 text-white transition-all duration-300 hover:bg-neutral-800 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2">
+              <span class="relative">Cancel Registration</span>
+            </a>
           </div>
         </form>
       </div>
