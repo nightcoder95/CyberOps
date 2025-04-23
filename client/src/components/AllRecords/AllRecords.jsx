@@ -170,7 +170,7 @@ function AllRecords() {
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
-                        maxWidth: "680px", // Adjust this width as needed
+                        maxWidth: "650px", // Adjust this width as needed
                       }}
                       title={rowData.social} // Tooltip on hover
                     >

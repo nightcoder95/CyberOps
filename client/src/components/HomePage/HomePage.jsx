@@ -90,7 +90,7 @@ function HomePage() {
             <div className="box box1" onClick={() => navigate("/data-table")}>
               <div className="text">
                 <h2 className="text-2xl font-black ">{totalRecords}</h2>
-                <h2 className="topic">Records</h2>
+                <h2 className="topic">SM Profiles</h2>
               </div>
 
               <img src="/records.png" alt="Views" />
@@ -99,7 +99,7 @@ function HomePage() {
             <div className="box box2" onClick={() => navigate("/all-profiles")}>
               <div className="text">
                 <h2 className="text-2xl font-black ">{totalAccounts}</h2>
-                <h2 className="topic">Unique SM Accounts</h2>
+                <h2 className="topic">Unique Profiles</h2>
               </div>
 
               <img src="/account.png" alt="likes" />
