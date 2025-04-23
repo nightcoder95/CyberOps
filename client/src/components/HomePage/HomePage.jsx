@@ -89,8 +89,8 @@ function HomePage() {
           <div className="box-container">
             <div className="box box1" onClick={() => navigate("/data-table")}>
               <div className="text">
+                <h2 className="topic">Social Media Profiles</h2>
                 <h2 className="text-2xl font-black ">{totalRecords}</h2>
-                <h2 className="topic">SM Profiles</h2>
               </div>
 
               <img src="/records.png" alt="Views" />
@@ -98,8 +98,8 @@ function HomePage() {
 
             <div className="box box2" onClick={() => navigate("/all-profiles")}>
               <div className="text">
-                <h2 className="text-2xl font-black ">{totalAccounts}</h2>
                 <h2 className="topic">Unique Profiles</h2>
+                <h2 className="text-2xl font-black ">{totalAccounts}</h2>
               </div>
 
               <img src="/account.png" alt="likes" />
@@ -107,8 +107,8 @@ function HomePage() {
 
             <div className="box box3">
               <div className="text">
-                <h2 className="text-2xl font-black ">{lastReportDate}</h2>
                 <h2 className="topic">Last Report Date</h2>
+                <h2 className="text-2xl font-black ">{lastReportDate}</h2>
               </div>
 
               <img src="/date.png" alt="comments" />
@@ -116,8 +116,8 @@ function HomePage() {
 
             <div className="box box4">
               <div className="text">
-                <h2 className="text-2xl font-black ">{lastUpdateDate}</h2>
-                <h2 className="topic">Last Updated</h2>
+                <h2 className="topic">Last Updated On</h2>
+                <h2 className="text-2xl font-black">{lastUpdateDate}</h2>
               </div>
 
               <img src="/updation.png" alt="published" />
