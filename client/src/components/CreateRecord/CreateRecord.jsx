@@ -229,7 +229,11 @@ function CreateRecord() {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label for="report_date">Report Date</label>
+                  <label
+                    for="report_date"
+                    className="block text-sm font-medium text-gray-700">
+                    Report Date<span className="text-red-500"> *</span>
+                  </label>
                   <input
                     onChange={inputHandler}
                     type="date"
@@ -240,7 +244,11 @@ function CreateRecord() {
               </div>
               <div className="group-4">
                 <div className="form-group">
-                  <label for="from">From</label>
+                  <label
+                    htmlFor="from"
+                    className="block text-sm font-medium text-gray-700">
+                    From<span className="text-red-500"> *</span>
+                  </label>
                   <input
                     onChange={inputHandler}
                     type="text"
@@ -251,7 +259,11 @@ function CreateRecord() {
                 </div>
 
                 <div className="form-group">
-                  <label for="reference">Reference</label>
+                  <label
+                    htmlFor="reference"
+                    className="block text-sm font-medium text-gray-700">
+                    Reference<span className="text-red-500"> *</span>
+                  </label>
                   <input
                     onChange={inputHandler}
                     type="text"

@@ -27,7 +27,7 @@ function Sidebar({ isNavClosed }) {
                 className="nav-img w-10 h-10"
                 alt="dashboard"
               />
-              <h3>Dashboard</h3>
+              <h3 className="text-lg font-bold">Dashboard</h3>
             </div>
             <div
               className={`nav-option ${
@@ -42,7 +42,7 @@ function Sidebar({ isNavClosed }) {
                 className="nav-img w-10 h-10"
                 alt="report"
               />
-              <h3>View Data Table</h3>
+              <h3 className="text-lg font-bold">View Data Table</h3>
             </div>
 
             <div
@@ -58,7 +58,7 @@ function Sidebar({ isNavClosed }) {
                 className="nav-img w-10 h-10"
                 alt="articles"
               />
-              <h3>Create Record</h3>
+              <h3 className="text-lg font-bold">Create Record</h3>
             </div>
 
             {/* <div className="nav-option option4" onclick="selectOption(this)">

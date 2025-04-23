@@ -11,20 +11,13 @@ export const createRecord = async (req, res) => {
         const newRecord = new SocialData(req.body)
         // console.log(newRecord)
 
-        /* `const { record_id } = newRecord` is a destructuring assignment in JavaScript. It is
-        extracting the `record_id` property from the `newRecord` object and assigning it to a
-        variable named `record_id`. This syntax allows you to extract specific properties from an
-        object and assign them to variables with the same name. In this case, it is extracting the
-        `record_id` property from the newly created record object for further use in the code. */
         const { record_id } = newRecord
-
 
         // Checking whether the record already exists..
         const recordExist = await SocialData.findOne({ record_id })
         if (recordExist) {
             return res.status(400).json({ message: "Record already exists" })
         }
-        // const record_id = 
         // Else save the record to the database
         const saveRecord = await newRecord.save()
 
@@ -47,7 +40,7 @@ export const findLastRecord = async (req, res) => {
     }
 }
 
-//function  for getting all records
+//function  for getting all records. Commented code is for pagination but currently not in use because frontend is paginated using PrimeReact Library
 export const getAllRecords = async (req, res) => {
     // Extract page from the req url and Default to page 1 if not provided
     // const page = parseInt(req.query.page) || 1
@@ -123,7 +116,7 @@ export const updateRecord = async (req, res) => {
     }
 }
 
-// function for deleting a record
+// function for deleting a record. Currently deleting a record is disabled on frontend
 export const deleteRecord = async (req, res) => {
     try {
         // get the id from the url parameter
