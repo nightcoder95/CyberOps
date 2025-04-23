@@ -125,9 +125,9 @@ function AllRecords() {
                 resizableColumns
                 showGridlines
                 paginator
-                rows={5}
+                rows={10}
                 removableSort
-                rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                rowsPerPageOptions={[10, 25, 50, 100]}
                 currentPageReportTemplate="{first} to {last} of {totalRecords}"
                 tableStyle={{ minWidth: "60rem" }}
                 className="styled-table"

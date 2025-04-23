@@ -24,7 +24,7 @@ function Sidebar({ isNavClosed }) {
               }}>
               <img
                 src="/dashboard.png"
-                className="nav-img w-10 h-10"
+                className="nav-img w-11 h-11"
                 alt="dashboard"
               />
               <h3 className="text-lg font-bold">Dashboard</h3>
@@ -38,11 +38,26 @@ function Sidebar({ isNavClosed }) {
                 navigate("/data-table");
               }}>
               <img
-                src="/dataTable.png"
-                className="nav-img w-10 h-10"
+                src="/profiles.png"
+                className="nav-img w-11 h-11"
                 alt="report"
               />
-              <h3 className="text-lg font-bold">View Data Table</h3>
+              <h3 className="text-lg font-bold">View Profiles</h3>
+            </div>
+            <div
+              className={`nav-option ${
+                activeOption === "option3" ? "active" : ""
+              }`}
+              onClick={() => {
+                handleOptionClick("option3");
+                navigate("/all-profiles");
+              }}>
+              <img
+                src="/unique.png"
+                className="nav-img w-11 h-11"
+                alt="report"
+              />
+              <h3 className="text-lg font-bold">Unique Profiles</h3>
             </div>
 
             <div
@@ -54,11 +69,11 @@ function Sidebar({ isNavClosed }) {
                 navigate("/create-record");
               }}>
               <img
-                src="/create.png"
-                className="nav-img w-10 h-10"
+                src="/add-profile.png"
+                className="nav-img w-11 h-11"
                 alt="articles"
               />
-              <h3 className="text-lg font-bold">Create Record</h3>
+              <h3 className="text-lg font-bold">Add Profile</h3>
             </div>
 
             {/* <div className="nav-option option4" onclick="selectOption(this)">
