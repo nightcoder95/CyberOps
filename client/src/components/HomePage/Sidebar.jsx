@@ -13,7 +13,7 @@ function Sidebar({ isNavClosed }) {
     <>
       <div className={`navcontainer ${isNavClosed ? "navclose" : ""}`}>
         <nav className="nav ">
-          <div className="nav-upper-options">
+          <div className="nav-upper-options ">
             <div
               className={`nav-option ${
                 activeOption === "option1" ? "active" : ""
@@ -24,7 +24,7 @@ function Sidebar({ isNavClosed }) {
               }}>
               <img
                 src="/dashboard.png"
-                className="nav-img w-11 h-11"
+                className="nav-img w-9 h-9"
                 alt="dashboard"
               />
               <h3 className="text-lg font-bold">Dashboard</h3>
@@ -39,7 +39,7 @@ function Sidebar({ isNavClosed }) {
               }}>
               <img
                 src="/profiles.png"
-                className="nav-img w-11 h-11"
+                className="nav-img w-9 h-9"
                 alt="report"
               />
               <h3 className="text-lg font-bold">View Profiles</h3>
@@ -52,11 +52,7 @@ function Sidebar({ isNavClosed }) {
                 handleOptionClick("option3");
                 navigate("/all-profiles");
               }}>
-              <img
-                src="/unique.png"
-                className="nav-img w-11 h-11"
-                alt="report"
-              />
+              <img src="/unique.png" className="nav-img w-9 h-9" alt="report" />
               <h3 className="text-lg font-bold">Unique Profiles</h3>
             </div>
 
@@ -70,7 +66,7 @@ function Sidebar({ isNavClosed }) {
               }}>
               <img
                 src="/add-profile.png"
-                className="nav-img w-11 h-11"
+                className="nav-img w-9 h-9"
                 alt="articles"
               />
               <h3 className="text-lg font-bold">Add Profile</h3>

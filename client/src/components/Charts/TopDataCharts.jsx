@@ -89,7 +89,7 @@ function TopDataCharts() {
     <div className="charts-container">
       {smNameData && (
         <div className="chart-wrapper">
-          <h3>Top Social Media Accounts</h3>
+          <h3>Most Reported Social Media Accounts</h3>
           <Bar data={smNameData} options={{ maintainAspectRatio: false }} />
         </div>
       )}

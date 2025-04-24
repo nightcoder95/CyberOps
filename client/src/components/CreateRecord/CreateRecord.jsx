@@ -184,10 +184,10 @@ function CreateRecord() {
                   <label for="dat">DAT</label>
                   <select onChange={inputHandler} id="dat" name="dat">
                     <option value="null"></option>
-                    <option value="Dat 1">Dat 1</option>
-                    <option value="Dat 2">Dat 2</option>
-                    <option value="Dat 3">Dat 3</option>
-                    <option value="Dat 4">Dat 4</option>
+                    <option value="DAT 1">DAT 1</option>
+                    <option value="DAT 2">DAT 2</option>
+                    <option value="DAT 3">DAT 3</option>
+                    <option value="DAT 4">DAT 4</option>
                   </select>
                 </div>
               </div>

@@ -6,6 +6,7 @@ import { Column } from "primereact/column";
 import Navbar from "../HomePage/Navbar";
 import Sidebar from "../HomePage/Sidebar";
 import { InputText } from "primereact/inputtext";
+import { data } from "autoprefixer";
 
 const AllProfiles = () => {
   const [profiles, setProfiles] = useState([]);
@@ -29,7 +30,12 @@ const AllProfiles = () => {
         console.log("Fetching data...");
         const response = await axios.get(`${API_URL}/api/total_accounts`);
         console.log(response.data);
-        setProfiles(response.data.data);
+        // To add SL to the table, we need to map the response data and add the index to it because we don't have a sl field in the database
+        const dataWithSL = response.data.data.map((item, index) => ({
+          ...item,
+          sl: index + 1, //So for each item,we add a new sl to it so that we can use it in the datatable
+        }));
+        setProfiles(dataWithSL);
       } catch (error) {
         console.log("Error is: ", error);
       }
@@ -45,7 +51,7 @@ const AllProfiles = () => {
         <div className="main">
           <div className="report-container">
             <div className="report-header">
-              <h1 className="recent-Articles">All Profiles</h1>
+              <h1 className="recent-Articles">Unique Social Media Profiles</h1>
             </div>
             <div className="custom-datatable">
               <div className="p-inputgroup global-search">
@@ -74,6 +80,41 @@ const AllProfiles = () => {
                 paginatorTemplate="RowsPerPageDropdown CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink">
                 <Column
                   sortable
+                  field="sl"
+                  header="SL"
+                  style={{ width: "80px", textAlign: "left" }}
+                />
+
+                <Column
+                  sortable
+                  field="sm_name"
+                  header="Social Media Profiles"
+                  bodyStyle={{ padding: "10px", textAlign: "left" }}
+                  body={(rowData) => (
+                    <div
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "400px", // Adjust this width as needed
+                      }}
+                      title={rowData.sm_name} // Tooltip on hover
+                    >
+                      <a
+                        href={rowData.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          color: "#3A59D1",
+                          textDecoration: "underline",
+                        }}>
+                        {rowData.sm_name}
+                      </a>
+                    </div>
+                  )}
+                />
+                <Column
+                  sortable
                   field="totalRecords"
                   header="Count"
                   bodyStyle={{ padding: "10px", textAlign: "left" }}
@@ -91,26 +132,7 @@ const AllProfiles = () => {
                     </div>
                   )}
                 />
-                <Column
-                  sortable
-                  field="sm_name"
-                  header="SM Account"
-                  bodyStyle={{ padding: "10px", textAlign: "left" }}
-                  body={(rowData) => (
-                    <div
-                      style={{
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        maxWidth: "400px", // Adjust this width as needed
-                      }}
-                      title={rowData.sm_name} // Tooltip on hover
-                    >
-                      {rowData.sm_name}
-                    </div>
-                  )}
-                />
-                <Column
+                {/* <Column
                   sortable
                   field="link"
                   header="Link"
@@ -128,7 +150,7 @@ const AllProfiles = () => {
                       {rowData.link}
                     </div>
                   )}
-                />
+                /> */}
               </DataTable>
             </div>
           </div>

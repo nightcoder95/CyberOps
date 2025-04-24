@@ -40,7 +40,7 @@
   min-width: 900px;
 }
 .social {
-  min-width: 1000px;
+  min-width: 900px;
 }
 
 .form-group label {
@@ -53,6 +53,7 @@
 .form-group input,
 .form-group select,
 .form-group textarea {
+  height: 37px;
   padding: 8px;
   border: 1px solid var(--Border-color);
   border-radius: 5px;

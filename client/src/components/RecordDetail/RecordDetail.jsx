@@ -198,7 +198,7 @@ function RecordDetail() {
                       <span>Type 02:</span> {formData.type_02}
                     </p>
                     <p>
-                      <span>Dat: </span> {formData.dat}
+                      <span>DAT: </span> {formData.dat}
                     </p>
                     {/* <p>
                       <span>Type:</span> {formData.type}
