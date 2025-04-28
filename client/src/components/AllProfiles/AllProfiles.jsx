@@ -100,16 +100,14 @@ const AllProfiles = () => {
                       }}
                       title={rowData.sm_name} // Tooltip on hover
                     >
-                      <a
-                        href={rowData.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        to={`/profile/${encodeURIComponent(rowData.sm_name)}`}
                         style={{
                           color: "#3A59D1",
                           textDecoration: "underline",
                         }}>
                         {rowData.sm_name}
-                      </a>
+                      </Link>
                     </div>
                   )}
                 />

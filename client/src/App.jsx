@@ -14,6 +14,7 @@ import "./App.css";
 import ProtectedRoute from "./components/LoginPage/ProtectedRoute.jsx";
 import AllProfiles from "./components/AllProfiles/AllProfiles.jsx";
 import UserManagement from "./components/UserManagement/UserManagement.jsx";
+import ProfileLinks from "./components/ProfileLinks/ProfileLinks.jsx";
 
 function App() {
   const route = createBrowserRouter([
@@ -42,6 +43,14 @@ function App() {
       element: (
         <ProtectedRoute>
           <AllProfiles />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/profile/:sm_name",
+      element: (
+        <ProtectedRoute>
+          <ProfileLinks />
         </ProtectedRoute>
       ),
     },

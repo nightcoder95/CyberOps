@@ -300,3 +300,15 @@ export const getLastUpdatedDate = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+// Function to get all the links associated with a name
+export const getLinksBySMName = async (req, res) => {
+    try {
+        const { sm_name } = req.params;
+        const links = await SocialData.find({ sm_name, link: { $nin: ["", null] }, }).select('link');
+        res.status(200).json({ links });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+
+}
