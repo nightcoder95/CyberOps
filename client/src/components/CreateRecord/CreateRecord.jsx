@@ -8,12 +8,13 @@ import toast, { Toaster } from "react-hot-toast";
 
 function CreateRecord() {
   const [isNavClosed, setIsNavClosed] = useState(false);
-  const [lastRecord, setLastRecord] = useState(null);
+  const [lastRecord, setLastRecord] = useState(null); // Initialize lastRecord to 1
   const navigate = useNavigate();
 
   const initialFormData = {
-    // Initially the lastRecord has the value null
+    // Initially the lastRecord has the value 1
     record_id: lastRecord,
+    unit_id: "",
     smm_link: "",
     type: "",
     pp_id: "",
@@ -46,17 +47,17 @@ function CreateRecord() {
     setIsNavClosed(!isNavClosed);
   };
 
+  // Effect to get the user unit from localStorage
+const unit = localStorage.getItem("unit");
+
   // effect for getting the last record_id
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("Fetching data...");
         const response = await axios.get(`${API_URL}/api/last_record`);
         // Update state with the fetched records and total pages
         const result = response.data.lastRecord;
         setLastRecord(result + 1);
-        // console.log("Result: ", (result));
-        // console.log("Last Record: ", lastRecord);
       } catch (error) {
         console.log("Error is: ", error);
       }
@@ -68,15 +69,14 @@ function CreateRecord() {
   const submitForm = async (e) => {
     e.preventDefault();
     // dataToSend is needed because this function runs as asynchronous, and this is need to change the value of record_id to lastRecord
-    const dataToSend = { ...formData, record_id: lastRecord };
-    console.log(dataToSend);
+    const dataToSend = { ...formData, record_id: lastRecord, unit_id: `${unit} - ${lastRecord}` };
     await axios
       .post(`${API_URL}/api/create_record`, dataToSend)
       .then((response) => {
         toast.success(response.data.message);
         setTimeout(() => {
           window.location.reload(); // Reload the page after 1 second
-        }, 1000); // 1000 milliseconds = 1 second
+        }, 500); // 1000 milliseconds = 1 second
         // navigate("/");
         setFormData(initialFormData);
       })
@@ -107,6 +107,16 @@ function CreateRecord() {
                     id="record_id"
                     name="record_id"
                     value={lastRecord}
+                    disabled
+                  />
+                </div>
+                <div className="form-group">
+                  <label for="unit_id">Unit ID</label>
+                  <input
+                    type="text"
+                    id="unit_id"
+                    name="unit_id"
+                    value={`${unit} -  ${lastRecord}`}
                     disabled
                   />
                 </div>

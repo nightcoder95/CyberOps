@@ -5,9 +5,9 @@ import jwt from 'jsonwebtoken';
 // User register function
 export const registerUser = async (req, res) => {
     try {
-        const { pen, password, role } = req.body;
+        const { pen, password, role, unit, name } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ pen, password: hashedPassword, role });
+        const user = new User({ pen, password: hashedPassword, role, unit, name });
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
@@ -28,10 +28,12 @@ export const loginUser = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid password' });
         }
-        const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET);
+        const token = jwt.sign({ userId: user._id, role: user.role, unit: user.unit }, process.env.JWT_SECRET);
         res.status(200).json({
             message: "User logged in successfully",
-            token: token
+            token: token,
+            unit: user.unit,
+            role: user.role,
         });
 
     } catch (error) {

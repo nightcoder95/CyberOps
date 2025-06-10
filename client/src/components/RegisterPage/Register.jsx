@@ -8,6 +8,8 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("");
+  const [unit, setUnit] = useState("");
+  const [name, setName] = useState("");
   const navigate = useNavigate();
 
   const API_URL = import.meta.env.VITE_BACKEND_XCELL;
@@ -28,6 +30,8 @@ export default function RegisterPage() {
           pen,
           password,
           role,
+          unit,
+          name
         },
         {
           headers: {
@@ -73,6 +77,18 @@ export default function RegisterPage() {
           </div>
           <div className="mb-4">
             <label className="block mb-1 text-sm font-bold text-gray-700">
+              Name
+            </label>
+            <input
+              type="text"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+              placeholder="Enter Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block mb-1 text-sm font-bold text-gray-700">
               Role
             </label>
             <select
@@ -82,6 +98,38 @@ export default function RegisterPage() {
               <option value="">Select a role</option>
               <option value="admin">Admin</option>
               <option value="user">User</option>
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block mb-1 text-sm font-bold text-gray-700">
+              Unit
+            </label>
+            <select
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+              value={unit}
+              onChange={(e) => setUnit(e.target.value)}>
+              <option value="">Select a unit</option>
+              <option value="SSB HQ">SSB HQ</option>
+              <option value="TVM C">TVM C</option>
+              <option value="KLM C">KLM C</option>
+              <option value="EKM C">EKM C</option>
+              <option value="TSR C">TSR C</option>
+              <option value="KKD C">KKD C</option>
+              <option value="KNR C">KNR C</option>
+              <option value="TVM R">TVM R</option>
+              <option value="KLM R">KLM R</option>
+              <option value="PTA">PTA</option>
+              <option value="ALP">ALP</option>
+              <option value="KTM">KTM</option>
+              <option value="IDK">IDK</option>
+              <option value="EKM R">EKM R</option>
+              <option value="TSR R">TSR R</option>
+              <option value="PKD">PKD</option>
+              <option value="MLP">MLP</option>
+              <option value="KKD R">KKD R</option>
+              <option value="WYD">WYD</option>
+              <option value="KNR R">KNR R</option>
+              <option value="KSD">KSD</option>
             </select>
           </div>
 

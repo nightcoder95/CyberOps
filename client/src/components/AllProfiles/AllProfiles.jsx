@@ -27,9 +27,7 @@ const AllProfiles = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("Fetching data...");
         const response = await axios.get(`${API_URL}/api/total_accounts`);
-        console.log(response.data);
         // To add SL to the table, we need to map the response data and add the index to it because we don't have a sl field in the database
         const dataWithSL = response.data.data.map((item, index) => ({
           ...item,

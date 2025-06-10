@@ -45,11 +45,9 @@ function AllRecords() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("Fetching data...");
         const response = await axios.get(`${API_URL}/api/get_records`);
         // Update state with the fetched records and total pages
         setRecords(response.data.records);
-        console.log(records);
         // setTotalPages(response.data.totalPages);
       } catch (error) {
         console.log("Error is: ", error);
@@ -82,14 +80,6 @@ function AllRecords() {
       </div>
     );
   };
-
-  // Example edit and delete functions
-  // const editRecord = (rowData) => {
-  //   console.log("Editing", rowData);
-  //   // Add your edit logic here
-  // };
-
-  // Function for global search
 
   return (
     <>
@@ -134,8 +124,8 @@ function AllRecords() {
                 paginatorTemplate="RowsPerPageDropdown CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink">
                 <Column
                   sortable
-                  field="record_id"
-                  header="ID"
+                  field="unit_id"
+                  header="Unit ID"
                   style={{ width: "1%" }}
                   bodyStyle={{ padding: "10px", textAlign: "center" }}></Column>
                 <Column

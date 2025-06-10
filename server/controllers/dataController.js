@@ -9,8 +9,6 @@ import jwt from 'jsonwebtoken';
 export const createRecord = async (req, res) => {
     try {
         const newRecord = new SocialData(req.body)
-        // console.log(newRecord)
-
         const { record_id } = newRecord
 
         // Checking whether the record already exists..
@@ -34,7 +32,19 @@ export const findLastRecord = async (req, res) => {
     try {
         const lastRecord = await SocialData.find().sort({ record_id: -1 }).limit(1)
         // console.log('last record: ', lastRecord)
-        res.status(200).json({ lastRecord: lastRecord[0].record_id })
+        let recordIdToReturn;
+
+        if (lastRecord.length === 0) {
+            // If no records exist, we set the value to 0
+            recordIdToReturn = 0;
+            console.log('No records found, returning 0.');
+        } else {
+            // If records exist, we take the record_id from the first (and only) element
+            recordIdToReturn = lastRecord[0].record_id;
+            console.log('Found last record ID:', recordIdToReturn);
+        }
+
+        res.status(200).json({ lastRecord: recordIdToReturn });
     } catch (error) {
         res.status(500).json(error.message)
     }
@@ -275,7 +285,6 @@ export const findLastReportDate = async (req, res) => {
         // Return the last report date in dd-mm-yyyy format
         const date = new Date(latestRecord.report_date);
         const formattedDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-        // console.log("Last Report Date: ", latestRecord.report_date)
         res.status(200).json({ lastReportDate: formattedDate })
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -288,7 +297,6 @@ export const getLastUpdatedDate = async (req, res) => {
     try {
         const lastUpdatedDate = await SocialData.findOne()
             .sort({ updatedAt: -1 });
-        // console.log("Last Updated Record:", lastUpdatedDate.updatedAt);
         // Method to format date in to dd-mm-yyyy 
         if (lastUpdatedDate) {
             const date = new Date(lastUpdatedDate.updatedAt);

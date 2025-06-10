@@ -15,7 +15,6 @@ export default function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      console.log("Request headers:", axios.defaults.headers.common); // Log headers
       const response = await axios.post(`${API_URL}/auth/login`, {
         pen,
         password,
@@ -24,6 +23,8 @@ export default function LoginPage() {
       const decoded = jwtDecode(token);
       localStorage.setItem("token", token);
       localStorage.setItem("role", decoded.role);
+      localStorage.setItem("unit", decoded.unit);
+      console.log("userUnit", decoded.unit);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/dashboard");
       toast.success(response.data.message);

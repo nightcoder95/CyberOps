@@ -6,6 +6,11 @@ const dataSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  unit_id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   smm_link: {
     type: Number,
   },

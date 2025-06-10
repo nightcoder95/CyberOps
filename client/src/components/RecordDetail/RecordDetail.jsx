@@ -15,6 +15,7 @@ function RecordDetail() {
   const { id } = useParams();
   const initialFormData = {
     record_id: "",
+    unit_id: "",
     smm_link: "",
     type: "",
     pp_id: "",
@@ -121,6 +122,7 @@ function RecordDetail() {
 
           const recordData = [
             ["Record ID", formData.record_id],
+            ["Unit ID", formData.unit_id],
             ["Platform", formData.platform],
             ["Type 01", formData.type_01],
             ["Type 02", formData.type_02],
@@ -146,7 +148,6 @@ function RecordDetail() {
         };
       };
     } catch (error) {
-      console.error("PDF Generation Error:", error);
       toast.error("Could not generate PDF. Image might be missing.");
     }
   };
@@ -171,7 +172,7 @@ function RecordDetail() {
           <div className="container">
             <div className="header">
               <h1>Record Details</h1>
-              <h4>Record ID: {formData.record_id}</h4>
+              <h4>Unit ID: {formData.unit_id}</h4>
             </div>
 
             <div className="content">
